@@ -1,13 +1,32 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import type { NextApiRequest, NextApiResponse } from "next";
+import { client } from "../../src/server/restFul";
 
 type Data = {
-  name: string
-}
+  name: string;
+};
 
-export default function getUser(
+client.connect((err) => {
+  if (err) {
+    console.error("connection error");
+  } else {
+    console.log("success!");
+  }
+});
+
+export default async function getUser(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<any>
 ) {
-  res.status(200).json({ name: 'John Doe' })
+    return new Promise((resolve, reject) => {
+        client.query("SELECT * FROM user", (err, result) => {
+            if(err){
+                reject(`${err}`)
+            } else {
+                resolve(res.status(200).json({ result }))
+            }
+            
+          });
+    })
+  
 }
