@@ -2,9 +2,20 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../src/server/restFul";
 
-type Data = {
+interface userRows {
+  user_id: string;
   name: string;
-};
+  password: string;
+  joinday: string;
+  address: string | null;
+}
+
+interface Data {
+    result?: {
+      rows?: userRows
+    };
+
+}
 
 client.connect((err) => {
   if (err) {
@@ -18,15 +29,14 @@ export default async function getUser(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-    return new Promise((resolve, reject) => {
-        client.query("SELECT * FROM user", (err, result) => {
-            if(err){
-                reject(`${err}`)
-            } else {
-                resolve(res.status(200).json({ result }))
-            }
-            
-          });
-    })
-  
+  return new Promise((resolve, reject) => {
+    client.query("SELECT * FROM box_user", (err, result) => {
+      if (err) {
+        reject(`${err}`);
+      } else {
+        const userLIst = result.rows;
+        resolve(res.status(200).json({ userLIst }));
+      }
+    });
+  });
 }
