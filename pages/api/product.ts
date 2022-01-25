@@ -10,17 +10,17 @@ client.connect((err) => {
   }
 });
 
-export default async function getUser(
+export default async function product(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
   return new Promise((resolve, reject) => {
-    client.query("SELECT * FROM box_user", (err, result) => {
+    client.query("SELECT * FROM product_list", (err, result) => {
       if (err) {
         reject(`${err}`);
       } else {
-        const userLIst = result.rows;
-        resolve(res.status(200).json({ userLIst }));
+        const productLIst = result.rows;
+        resolve(res.status(200).json({ productLIst }));
       }
     });
   });
