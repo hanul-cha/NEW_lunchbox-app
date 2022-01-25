@@ -2,10 +2,10 @@ import Head from 'next/head';
 import React from 'react';
 
 interface GlobalTitlePropType {
-
+  title:string
 }
 
-const GlobalTitle = ({title}:any) => {
+const GlobalTitle = ({title}:GlobalTitlePropType) => {
   return <Head><title>Hanul-Box | {title}</title></Head>;
 };
 

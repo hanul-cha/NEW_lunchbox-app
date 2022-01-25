@@ -102,3 +102,22 @@ INSERT INTO "product_list" (
     '신선한 오렌지 주스, 주문즉시 갈아드려요!',
     3000
 );
+INSERT INTO "product_list" (
+	product_type, name, img, explanation, price
+) VALUES (
+	'etc',
+	'치킨 샤와르마',
+	'https://cdn.pixabay.com/photo/2021/01/06/10/11/shawarma-5893935_960_720.jpg',
+    '브리또의 먼 친척되는 샤와르마, 양고기 추가는 요청사항에 적어주세요.',
+    6000
+);
+INSERT INTO "product_list" (
+	product_type, name, img, explanation, price, new_product
+) VALUES (
+	'drink',
+	'당근주스',
+	'https://cdn.pixabay.com/photo/2016/08/26/20/40/carrot-juice-1623079_960_720.jpg',
+    '건강하게 즐기고 싶은 분들을 위한 웰빙 음료',
+    6000,
+    TRUE
+);
