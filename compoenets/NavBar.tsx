@@ -4,37 +4,36 @@ import React from "react";
 
 const NavBar = () => {
   const router = useRouter();
+
   return (
     <>
       <nav>
         <div>
           <Link href="/">
-            <a className={router.pathname === "/" ? "active" : ""}>Home</a>
+            <a className={router.pathname === "/" ? "active" : ""}>HOME</a>
           </Link>
-          <Link href="/about">
-            <a className={router.pathname === "/about" ? "active" : ""}>
-              About
-            </a>
+    
+          <Link href="/">
+            <a className={router.pathname === "/allmenu" ? "active" : ""}>모든메뉴</a>
           </Link>
         </div>
       </nav>
       <style jsx>{`
         .active {
-          color: tomato;
+          color: #fff;
+          font-weight: 600;
         }
         nav {
           display: flex;
-          gap: 10px;
           flex-direction: column;
           align-items: center;
           padding-top: 20px;
-          padding-bottom: 10px;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+          padding-bottom: 20px;
+          
         }
         nav div {
           display: flex;
-          gap: 10px;
+          gap: 20px;
         }
       `}</style>
     </>
@@ -42,3 +41,7 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+/* 
+위에 userInfo로 값 바뀌는것들 싹다 테스트 해봐야함
+*/
