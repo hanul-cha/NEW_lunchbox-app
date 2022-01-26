@@ -13,8 +13,8 @@ const NavBar = () => {
             <a className={router.pathname === "/" ? "active" : ""}>HOME</a>
           </Link>
     
-          <Link href="/">
-            <a className={router.pathname === "/allmenu" ? "active" : ""}>모든메뉴</a>
+          <Link href="/allProduct">
+            <a className={router.pathname === "/allProduct" ? "active" : ""}>모든메뉴</a>
           </Link>
         </div>
       </nav>
