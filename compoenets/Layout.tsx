@@ -1,5 +1,6 @@
 import NavBar from "./NavBar";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
+import CardTravelIcon from "@mui/icons-material/CardTravel";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -13,22 +14,27 @@ const Layout = ({ children }: any) => {
   return (
     <>
       <div className="main_wrapper">
-
         <div className="topNav">
           {local ? (
-            <Link href="/userInfo">
-              <a>내정보</a>
-            </Link>
+            <div>
+              <Link href="/userInfo">
+                <a>내정보</a>
+              </Link>
+            </div>
           ) : (
-            <>
+            <div>
               <Link href="/login">
                 <a>로그인</a>
               </Link>
               <Link href="/join">
                 <a>회원가입</a>
               </Link>
-            </>
+            </div>
           )}
+        </div>
+
+        <div className="basket">
+          <CardTravelIcon sx={{ color: "white" }} />
         </div>
 
         <div className="header">
@@ -44,7 +50,6 @@ const Layout = ({ children }: any) => {
         <div>{children}</div>
       </div>
       <style jsx>{`
-        
         .main_wrapper {
           max-width: 600px;
           width: 100%;
@@ -58,6 +63,14 @@ const Layout = ({ children }: any) => {
           position: absolute;
           top: 10px;
           right: 10px;
+        }
+        .basket {
+          position: fixed;
+          bottom: 10px;
+          margin-left: 10px;
+          background: coral;
+          padding: 10px;
+          border-radius: 50%;
         }
         .header {
           background: coral;
