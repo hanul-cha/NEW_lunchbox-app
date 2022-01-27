@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/router";
 
 interface MaterialMediaCardType {
   info: {
@@ -19,9 +20,14 @@ interface MaterialMediaCardType {
 }
 
 const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
+  const router = useRouter();
+  const runRoute = () => {
+    router.push(`/product/${info.name}`)
+  }
+
   return (
     <>
-      <Card sx={{ maxWidth: 250 }}>
+      <Card onClick={runRoute}>
         <CardMedia component="img" height="140" image={info.img} alt={info.product_type + "이미지"} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
@@ -31,9 +37,6 @@ const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
             {info.explanation}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">장바구니에 추가</Button>
-        </CardActions>
       </Card>
     </>
   );

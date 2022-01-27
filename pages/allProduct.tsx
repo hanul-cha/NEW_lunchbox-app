@@ -14,19 +14,19 @@ interface productListType {
   price: number;
   product_id: number;
   product_type: string;
-}//제품에 할당된 타입
+} //제품에 할당된 타입
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-}//테이블 타입
+} //테이블 타입
 
 interface allProductType {
   allproduction: {
     productList: productListType[];
   };
-}//현재 페이지 props type
+} //현재 페이지 props type
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -39,14 +39,10 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ div: 4 }}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box sx={{ div: 4 }}>{children}</Box>}
     </div>
   );
-}//material 페이지 지정함수
+} //material 페이지 지정함수
 
 function a11yProps(index: number) {
   return {
@@ -92,28 +88,28 @@ const AllProduct: NextPage<allProductType> = ({ allproduction }) => {
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
-            <div className="selectAll">
+            <div className="selectAll listWrapper">
               {allproduction.productList.map((list, i) => {
                 return <MaterialMediaCard info={list} key={i} />;
               })}
             </div>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <div className="noodle">
+            <div className="noodle listWrapper">
               {noodleList.map((list, i) => {
                 return <MaterialMediaCard info={list} key={i} />;
               })}
             </div>
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <div className="rice">
+            <div className="rice listWrapper">
               {riceList.map((list, i) => {
                 return <MaterialMediaCard info={list} key={i} />;
               })}
             </div>
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <div className="drink">
+            <div className="drink listWrapper">
               {drinkList.map((list, i) => {
                 return <MaterialMediaCard info={list} key={i} />;
               })}
@@ -121,7 +117,14 @@ const AllProduct: NextPage<allProductType> = ({ allproduction }) => {
           </TabPanel>
         </Box>
       </div>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .listWrapper {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap:10px;
+          padding:20px;
+        }
+      `}</style>
     </>
   );
 };

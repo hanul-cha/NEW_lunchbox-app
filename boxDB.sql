@@ -61,7 +61,7 @@ INSERT INTO "product_list" (
 	'noodle',
 	'팟타이',
 	'https://cdn.pixabay.com/photo/2015/09/04/10/40/pad-thai-921884_960_720.jpg',
-    '태국의 대표적인 쌀국수 요리',
+    '태국의 대표적인 쌀국수 요리로 입맛없는 분들도 먹고싶어지는 자극적인 음식입니다',
     8900
 );
 
