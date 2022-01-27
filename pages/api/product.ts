@@ -19,8 +19,8 @@ export default async function product(
       if (err) {
         reject(`${err}`);
       } else {
-        const productLIst = result.rows;
-        resolve(res.status(200).json({ productLIst }));
+        const productList = result.rows;
+        resolve(res.status(200).json({ productList }));
       }
     });
   });

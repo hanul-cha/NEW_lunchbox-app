@@ -71,6 +71,7 @@ const Layout = ({ children }: any) => {
           background: coral;
           padding: 10px;
           border-radius: 50%;
+          z-index: 1000;
         }
         .header {
           background: coral;
