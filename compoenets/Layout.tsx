@@ -34,7 +34,7 @@ const Layout = ({ children }: any) => {
         </div>
 
         <div className="basket">
-          <CardTravelIcon sx={{ color: "white" }} />
+          <CardTravelIcon sx={{ fontSize: 40 }} />
         </div>
 
         <div className="header">
@@ -68,13 +68,13 @@ const Layout = ({ children }: any) => {
           position: fixed;
           bottom: 10px;
           margin-left: 10px;
-          background: coral;
+          background: #9AD0EC;
           padding: 10px;
           border-radius: 50%;
           z-index: 1000;
         }
         .header {
-          background: coral;
+          background: #9AD0EC;
           border-radius: 0 0 20px 20px;
         }
         .main-logo {
