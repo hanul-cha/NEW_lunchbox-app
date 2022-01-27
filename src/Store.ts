@@ -12,4 +12,6 @@ const wrapper = createWrapper(configureStore, {
   debug: process.env.NODE_ENV !== "production",
 });
 
+export type RootReducerType = ReturnType<typeof rootReducer>
+
 export default wrapper;
