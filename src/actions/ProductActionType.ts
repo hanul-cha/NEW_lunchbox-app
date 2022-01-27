@@ -1,37 +1,27 @@
-export const POKEMON_SUCCESS = 'POKEMON_SUCCESS'
-export const POKEMON_FAIL = 'POKEMON_FAIL'
+export const PRODUCT_SUCCESS = "PRODUCT_SUCCESS";
+export const PRODUCT_FAIL = "PRODUCT_FAIL";
 
 //액션타입들의 ts검사
-export type PokemonType = {
-    abilities: PokemonAbility[]
-    sprites: PokemonSprites
-}
-
-export type PokemonAbility = {
-    ability: {
-        name: string
-        url: string
-    },
-    is_hidden: boolean
-    slot: number
-}
-
-export type PokemonSprites = {
-    front_default: string
-}
-
+export interface ProductType {
+  explanation: string;
+  img: string;
+  name: string;
+  new_product: boolean;
+  price: number;
+  product_id: number;
+  product_type: string;
+};
 
 //넘겨줄 액션 타입
-export interface pokemonFailDispatch {
-    type: typeof POKEMON_FAIL
+export interface ProductFailDispatch {
+  type: typeof PRODUCT_FAIL;
 }
 
-export interface pokemonSuccessDispatch {
-    type: typeof POKEMON_SUCCESS
-    payload: {
-        abilities: PokemonAbility[]
-        sprites: PokemonSprites
-    }
+export interface ProductSuccessDispatch {
+  type: typeof PRODUCT_SUCCESS;
+  payload: {
+    productLIst: ProductType[];
+  };
 }
 
-export type PokemonDispatchType = pokemonFailDispatch | pokemonSuccessDispatch
+export type ProductDispatchType = ProductFailDispatch | ProductSuccessDispatch;
