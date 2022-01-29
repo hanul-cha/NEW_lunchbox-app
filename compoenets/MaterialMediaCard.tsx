@@ -22,7 +22,7 @@ interface MaterialMediaCardType {
 const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
   const router = useRouter();
   const runRoute = () => {
-    router.push(`/product/${info.name}`)
+    router.push(`/product/${info.product_id}`)
   }
 
   return (
