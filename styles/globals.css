@@ -142,5 +142,6 @@ a {
 
 .testCss {
   display: grid;
-  
+  color: #0084ff;
+  cursor: pointer;
 }

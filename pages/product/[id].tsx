@@ -9,8 +9,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import DoNotDisturbOffOutlinedIcon from '@mui/icons-material/DoNotDisturbOffOutlined';
 
 interface productListType {
   explanation: string;
@@ -41,9 +42,22 @@ const Product: NextPage<allProductType> = ({ product }) => {
 
   console.log(testReducer) */
 
+  const addCount = () => {
+    setProductCount(productCount + 1);
+  };
+  const removeCount = () => {
+    if (productCount !== 1) {
+      setProductCount(productCount - 1);
+    }
+  };
+
   const productInfo = product.productList[0];
 
-  console.log(productInfo);
+  /* console.log(productInfo); */
+
+  const addBasket = () => {
+    
+  }
 
   return (
     <>
@@ -57,29 +71,45 @@ const Product: NextPage<allProductType> = ({ product }) => {
               alt="green iguana"
             />
             <CardContent>
-              <div>
+              <div className="productInfo">
                 <h2>{productInfo.name}</h2>
+                <p>{productInfo.explanation}</p>
               </div>
             </CardContent>
           </CardActionArea>
         </Card>
         <div className="productOption">
-          <h3>가격 : {productInfo.price}원</h3>
+          <div className="price">
+            <h3>가격</h3>
+            <h3>{productInfo.price}원</h3>
+          </div>
+
           <div className="countWrapper">
             <h3>수량</h3>
             <div className="addTable">
-              <div>
-                <RemoveCircleIcon />
+              <div onClick={removeCount}>
+                {productCount == 1 ? (
+                  <DoNotDisturbOffOutlinedIcon />
+                ) : (
+                  <RemoveCircleOutlineIcon />
+                )}
               </div>
               <h3 className="addTableCount">{productCount}개</h3>
-              <div>
-                <AddCircleIcon />
+              <div onClick={addCount}>
+                <AddCircleOutlineIcon />
               </div>
             </div>
           </div>
         </div>
+        <button className="product_btn" onClick={addBasket}>
+          <h3>{productCount}개 담기</h3>
+          <h3>결제금액 : {productCount * productInfo.price}원</h3>
+        </button>
       </div>
       <style jsx>{`
+        .productInfo >h2 {
+          margin-bottom: 8.4px;
+        }
         .productCard {
           margin: 20px;
         }
@@ -93,23 +123,47 @@ const Product: NextPage<allProductType> = ({ product }) => {
         .countWrapper {
           display: grid;
           justify-content: space-between;
-          grid-template-columns: auto 120px;
+          grid-template-columns: auto auto;
+          align-items: center;
+          padding: 30px 0;
+        }
+
+        .price {
+          border-bottom: 2px solid #434343;
+          padding: 30px 0;
+          display: grid;
+          justify-content: space-between;
+          grid-template-columns: auto auto;
           align-items: center;
         }
-        
-        
-        
+
         .addTable {
           border: 1px solid #434343;
           border-radius: 50px;
           height: 50px;
           display: grid;
           align-items: center;
-          grid-template-columns: 40px 40px 40px;
-          
+          grid-template-columns: 40px auto 40px;
         }
         .addTable > * {
           margin: 0 auto;
+        }
+        .product_btn {
+          background: #00aaff;
+          border: none;
+          border-radius: 5px;
+          width: 100%;
+          padding: 20px 40px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          cursor: pointer;
+          align-items: center;
+        }
+        .product_btn h3 {
+          color: white;
+        }
+        .product_btn:hover{
+          background: #0084ff;
         }
       `}</style>
     </>

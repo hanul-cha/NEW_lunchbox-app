@@ -16,19 +16,25 @@ interface MaterialMediaCardType {
     price: number;
     product_id: number;
     product_type: string;
-  }
+  };
 }
 
 const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
   const router = useRouter();
   const runRoute = () => {
-    router.push(`/product/${info.product_id}`)
-  }
+    router.push(`/product/${info.product_id}`);
+  };
 
   return (
     <>
       <Card onClick={runRoute}>
-        <CardMedia component="img" height="140" image={info.img} alt={info.product_type + "이미지"} />
+        <div className="materialCard">
+        <CardMedia
+          component="img"
+          height="140"
+          image={info.img}
+          alt={info.product_type + "이미지"}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {info.name}
@@ -37,7 +43,15 @@ const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
             {info.explanation}
           </Typography>
         </CardContent>
+        </div>
       </Card>
+      <style jsx>
+        {`
+          .materialCard {
+            cursor: pointer;
+          }
+        `}
+      </style>
     </>
   );
 };
