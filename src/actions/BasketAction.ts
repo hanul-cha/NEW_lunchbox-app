@@ -5,19 +5,11 @@ import {
   BasketSuccessDispatch,
 } from "./BasketActionType";
 
-const BasketAction =
-  (AddBasketList: BasketReducerPropType[]) =>
-  (dispatch: Dispatch<BasketSuccessDispatch>) => {
-    try{
-      dispatch({
-        type: ADD_BASKETLIST,
-        payload: AddBasketList,
-      })
-    } catch {
-
-    }
-      
-    
-  };
+const BasketAction = (AddBasketList: BasketReducerPropType[]) => {
+  return {
+    type:ADD_BASKETLIST,
+    payload:AddBasketList
+  }
+};
 
 export default BasketAction;

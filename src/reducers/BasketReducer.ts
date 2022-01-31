@@ -18,10 +18,12 @@ const BasketReducer = (
 ) => {
   switch (action.type) {
     case ADD_BASKETLIST:
-      const addState = state.basketList.concat();
+      state.basketList = state.basketList.concat(action.payload)
       return {
-        ...addState,
+        ...state,
       };
+    default:
+      return state;
   }
 };
 

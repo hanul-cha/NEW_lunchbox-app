@@ -5,8 +5,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
-import BasketReducer from "../src/reducers/BasketReducer";
-import { ADD_BASKETLIST } from "../src/actions/BasketActionType";
+import BasketAction from "../src/actions/BasketAction";
 
 const Layout = ({ children }: any) => {
   const [local, setLocal] = useState<string | undefined | null>();
@@ -16,7 +15,15 @@ const Layout = ({ children }: any) => {
     setLocal(mylocal);
   }, []);
 
+  const testReducer = useSelector((state:RootReducerType) =>state.BasketReducer)
+  const dispatch = useDispatch()
+
   
+  useEffect(() => {
+    dispatch(BasketAction([]))
+  },[])
+
+  console.log(testReducer)
 
 
   return (

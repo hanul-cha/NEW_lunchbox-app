@@ -9,5 +9,5 @@ export interface BasketReducerPropType {
 
 export interface BasketSuccessDispatch {
   type:string;
-  payload?: BasketReducerPropType[];
+  payload: BasketReducerPropType[];
 }
