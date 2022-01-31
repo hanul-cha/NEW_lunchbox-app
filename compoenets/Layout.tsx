@@ -6,10 +6,12 @@ import Link from "next/link";
 
 const Layout = ({ children }: any) => {
   const [local, setLocal] = useState<string | undefined | null>();
+  const [basketCount, setBasketCount] = useState(0);
   useEffect(() => {
     const mylocal = window.localStorage.getItem("userName");
     setLocal(mylocal);
   }, []);
+
 
   return (
     <>
@@ -35,6 +37,9 @@ const Layout = ({ children }: any) => {
 
         <div className="basket">
           <CardTravelIcon sx={{ fontSize: 40 }} />
+          <div className="basketCount">
+            <h3>{basketCount}</h3>
+          </div>
         </div>
 
         <div className="header">
@@ -73,6 +78,22 @@ const Layout = ({ children }: any) => {
           border-radius: 50%;
           z-index: 1000;
         }
+        .basketCount {
+          background: #fff;
+          position: absolute;
+          top: 15%;
+          right: 15%;
+          width: 25px;
+          height:25px;
+          display: grid;
+          align-items: center;
+          border-radius: 50px
+        }
+        .basketCount h3 {
+          font-size: 20px;
+          text-align: center;
+          font-weight: 600;
+        }
         .header {
           background: #9AD0EC;
           border-radius: 0 0 20px 20px;
@@ -98,6 +119,7 @@ const Layout = ({ children }: any) => {
           font-size: 40px;
           margin-right: -2px;
         }
+        
       `}</style>
     </>
   );
