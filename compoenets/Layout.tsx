@@ -1,30 +1,16 @@
 import NavBar from "./NavBar";
 import LocalDiningIcon from "@mui/icons-material/LocalDining";
-import CardTravelIcon from "@mui/icons-material/CardTravel";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { RootReducerType } from "../src/Store";
-import BasketAction from "../src/actions/BasketAction";
+import BasketNav from "./basket/BasketNav";
 
 const Layout = ({ children }: any) => {
   const [local, setLocal] = useState<string | undefined | null>();
-  const [basketCount, setBasketCount] = useState(0);
+  
   useEffect(() => {
     const mylocal = window.localStorage.getItem("userName");
     setLocal(mylocal);
   }, []);
-
-  const testReducer = useSelector((state:RootReducerType) =>state.BasketReducer)
-  const dispatch = useDispatch()
-
-  
-  useEffect(() => {
-    dispatch(BasketAction([]))
-  },[])
-
-  console.log(testReducer)
-
 
   return (
     <>
@@ -48,12 +34,7 @@ const Layout = ({ children }: any) => {
           )}
         </div>
 
-        <div className="basket">
-          <CardTravelIcon sx={{ fontSize: 40 }} />
-          <div className="basketCount">
-            <h3>{basketCount}</h3>
-          </div>
-        </div>
+        <BasketNav />
 
         <div className="header">
           <div className="main-logo">

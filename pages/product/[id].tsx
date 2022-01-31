@@ -9,9 +9,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import DoNotDisturbOffOutlinedIcon from '@mui/icons-material/DoNotDisturbOffOutlined';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import DoNotDisturbOffOutlinedIcon from "@mui/icons-material/DoNotDisturbOffOutlined";
+import BasketAction from "../../src/actions/BasketAction";
 
 interface productListType {
   explanation: string;
@@ -33,14 +34,12 @@ const Product: NextPage<allProductType> = ({ product }) => {
   const [productCount, setProductCount] = useState(1);
   /* const testReducer = useSelector((state:RootReducerType) =>state.ProductReducer)
   const dispatch = useDispatch()
-
-  
   useEffect(() => {
     dispatch(fetchProductData())
-    
   },[])
-
   console.log(testReducer) */
+
+  const route = useRouter()
 
   const addCount = () => {
     setProductCount(productCount + 1);
@@ -52,12 +51,24 @@ const Product: NextPage<allProductType> = ({ product }) => {
   };
 
   const productInfo = product.productList[0];
+  /* const basketReducer = useSelector(
+    (state: RootReducerType) => state.BasketReducer
+  ); */ //전역상태리스트를 볼것임
+  const dispatch = useDispatch();
 
   /* console.log(productInfo); */
 
   const addBasket = () => {
-    
-  }
+    const addBasketList = {
+      basket_id: null,
+      product_id: productInfo.product_id,
+      order_id: null,
+      quentity: productCount,
+    };
+
+    dispatch(BasketAction([addBasketList]));
+    route.push("/allProduct")
+  };
 
   return (
     <>
@@ -107,7 +118,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
         </button>
       </div>
       <style jsx>{`
-        .productInfo >h2 {
+        .productInfo > h2 {
           margin-bottom: 8.4px;
         }
         .productCard {
@@ -162,7 +173,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
         .product_btn h3 {
           color: white;
         }
-        .product_btn:hover{
+        .product_btn:hover {
           background: #0084ff;
         }
       `}</style>
