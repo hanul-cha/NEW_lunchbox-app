@@ -3,6 +3,10 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import CardTravelIcon from "@mui/icons-material/CardTravel";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducerType } from "../src/Store";
+import BasketReducer from "../src/reducers/BasketReducer";
+import { ADD_BASKETLIST } from "../src/actions/BasketActionType";
 
 const Layout = ({ children }: any) => {
   const [local, setLocal] = useState<string | undefined | null>();
@@ -11,6 +15,8 @@ const Layout = ({ children }: any) => {
     const mylocal = window.localStorage.getItem("userName");
     setLocal(mylocal);
   }, []);
+
+  
 
 
   return (

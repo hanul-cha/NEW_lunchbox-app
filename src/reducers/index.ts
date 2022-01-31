@@ -1,9 +1,11 @@
 import { AnyAction, CombinedState, combineReducers } from "redux";
-import ProductReducer, { ISuccessState } from "./ProductReducer";
+import ProductReducer from "./ProductReducer";
+import BasketReducer from "./BasketReducer";
 import { HYDRATE } from "next-redux-wrapper"
 
 const rootReducer = combineReducers({
-    ProductReducer
+    ProductReducer,
+    BasketReducer
 })
 
 export interface IState {

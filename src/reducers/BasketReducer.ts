@@ -1,9 +1,28 @@
-import { ADD_BASKETLIST, ProductSuccessDispatch } from "../actions/BasketActionType";
+import {
+  ADD_BASKETLIST,
+  BasketSuccessDispatch,
+  BasketReducerPropType,
+} from "../actions/BasketActionType";
 
-const initialState = {
-    basketList:{}
+export interface BasketReducerState {
+  basketList: BasketReducerPropType[];
 }
 
-const BasketReducer = (state=initialState, action:ProductSuccessDispatch) => {
-    
-}
+const initialState: BasketReducerState = {
+  basketList: [],
+};
+
+const BasketReducer = (
+  state: BasketReducerState = initialState,
+  action: BasketSuccessDispatch
+) => {
+  switch (action.type) {
+    case ADD_BASKETLIST:
+      const addState = state.basketList.concat();
+      return {
+        ...addState,
+      };
+  }
+};
+
+export default BasketReducer;
