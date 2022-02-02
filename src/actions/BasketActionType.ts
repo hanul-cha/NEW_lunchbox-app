@@ -5,6 +5,7 @@ export interface BasketReducerPropType {
   product_id?: number;
   order_id?: number|null;
   quentity?: number;
+  price?:number;
 }
 
 export interface BasketSuccessDispatch {

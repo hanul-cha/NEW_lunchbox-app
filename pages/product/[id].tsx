@@ -64,6 +64,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
       product_id: productInfo.product_id,
       order_id: null,
       quentity: productCount,
+      price:productCount * productInfo.price
     };
 
     dispatch(BasketAction([addBasketList]));
