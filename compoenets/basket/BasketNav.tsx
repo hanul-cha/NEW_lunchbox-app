@@ -14,7 +14,7 @@ const BasketNav = () => {
 
   const basketLength = basketReducer.basketList.length
   //담긴 배열의 길이로 장바구니 숫자를 구현
-  console.log(basketReducer.basketList)
+  /* console.log(basketReducer.basketList) */
   return (
     <>
       <div className="basket" onClick={pushBasket}>
