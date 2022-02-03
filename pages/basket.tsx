@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import BasketBTN from "../compoenets/basket/BasketBTN";
 
 const Basket: NextPage = () => {
   const [allList, setAllList] = useState<any[]>([]);
@@ -23,7 +24,6 @@ const Basket: NextPage = () => {
           ).json();
 
           /* console.log(product.productList[0]) */
-          const test = allList.concat(product.productList);
           setAllList((state) => [...state, product.productList[0]]);
         };
         getchDetailProduct(basketItem.product_id);
@@ -32,12 +32,14 @@ const Basket: NextPage = () => {
   }, []);
 
   console.log(basketReducer);
+  console.log(allList);
 
   return (
     <>
       <GlobalTitle title="장바구니" />
       <div>
         <h1>장바구니</h1>
+        <div className="basket">
         {allList.map((list, i) => {
           return (
             <div key={i + 1} className="basketWrapper">
@@ -53,17 +55,21 @@ const Basket: NextPage = () => {
                   </div>
                   <div className="basketText">
                     <h2>{list.name}</h2>
-                    <p>수량 : {basketReducer?.basketList[i]?.price}</p>
+                    <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
                     <p>가격 :{basketReducer?.basketList[i]?.price}</p>
                   </div>
                 </div>
+                <BasketBTN basketList={basketReducer.basketList} productList={allList} />
               </Card>
             </div>
           );
         })}
+        </div>
         <style jsx>{`
+          
           .basketWrapper {
             padding: 20px;
+            padding-top: 0;
           }
           .basketCard {
             display: grid;
