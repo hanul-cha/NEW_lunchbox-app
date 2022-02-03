@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import BasketBTN from "../compoenets/basket/BasketBTN";
+import NottingBasket from "../compoenets/basket/NottingBasket";
 
 const Basket: NextPage = () => {
   const [allList, setAllList] = useState<any[]>([]);
@@ -37,58 +38,68 @@ const Basket: NextPage = () => {
   return (
     <>
       <GlobalTitle title="장바구니" />
-      <div>
-        <h1>장바구니</h1>
-        <div className="basket">
-        {allList.map((list, i) => {
-          return (
-            <div key={i + 1} className="basketWrapper">
-              <Card>
-                <div className="basketCard">
-                  <div className="basketCardImg">
-                    <CardMedia
-                      component="img"
-                      image={list.img}
-                      sx={{ width: 200 }}
-                      alt="Live from space album cover"
-                    />
-                  </div>
-                  <div className="basketText">
-                    <h2>{list.name}</h2>
-                    <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
-                    <p>가격 :{basketReducer?.basketList[i]?.price}</p>
-                  </div>
+      {allList.length == 0 ? (
+        <NottingBasket />
+      ) : (
+        <div className="mainDIV">
+          <h1>장바구니</h1>
+          <div className="basket">
+            {allList.map((list, i) => {
+              return (
+                <div key={i + 1} className="basketWrapper">
+                  <Card>
+                    <div className="basketCard">
+                      <div className="basketCardImg">
+                        <CardMedia
+                          component="img"
+                          image={list.img}
+                          sx={{ width: 200 }}
+                          alt="Live from space album cover"
+                        />
+                      </div>
+                      <div className="basketText">
+                        <h2>{list.name}</h2>
+                        <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
+                        <p>가격 :{basketReducer?.basketList[i]?.price}</p>
+                      </div>
+                    </div>
+                  </Card>
                 </div>
-                <BasketBTN basketList={basketReducer.basketList} productList={allList} />
-              </Card>
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+          <BasketBTN
+            basketList={basketReducer.basketList}
+            productList={allList}
+          />
         </div>
-        <style jsx>{`
-          
-          .basketWrapper {
-            padding: 20px;
-            padding-top: 0;
-          }
-          .basketCard {
-            display: grid;
-            grid-template-columns: 120px auto;
-          }
-          .basketCardImg {
-            width: 100px;
-            height: 100px;
-            place-self: start start;
-            margin: 10px;
-            border-radius: 5px;
-            overflow: hidden;
-          }
-          .basketText {
-            padding: 10px;
-            padding-left: 0;
-          }
-        `}</style>
-      </div>
+      )}
+
+      <style jsx>{`
+        .mainDIV {
+          padding: 20px;
+        }
+        .basketWrapper {
+          padding: 20px 0;
+          padding-top: 0;
+        }
+        .basketCard {
+          display: grid;
+          grid-template-columns: 120px auto;
+        }
+        .basketCardImg {
+          width: 100px;
+          height: 100px;
+          place-self: start start;
+          margin: 10px;
+          border-radius: 5px;
+          overflow: hidden;
+        }
+        .basketText {
+          padding: 10px;
+          padding-left: 0;
+        }
+      `}</style>
     </>
   );
 };
