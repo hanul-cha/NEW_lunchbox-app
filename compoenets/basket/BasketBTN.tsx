@@ -36,11 +36,18 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
       }
   }, 0);
   console.log(totalPrice);
+
+  const runorder = () => {
+    
+  }
+
+
   return (
     <>
-      <div>
+      <button onClick={runorder}>
         <h2>총 주문 금액 : {totalPrice}원</h2>
-      </div>
+        <h2>주문하러 가기</h2>
+      </button>
     </>
   );
 };

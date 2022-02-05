@@ -8,7 +8,8 @@ const BasketNav = () => {
   const route = useRouter()
   const basketReducer = useSelector((state:RootReducerType) => state.BasketReducer)
   
-  const pushBasket = () => {
+  const pushBasket = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault()
     route.push("/basket")
   }
 
@@ -17,7 +18,7 @@ const BasketNav = () => {
   /* console.log(basketReducer.basketList) */
   return (
     <>
-      <div className="basket" onClick={pushBasket}>
+      <div className="basket" onClick={e => pushBasket(e)}>
         <CardTravelIcon sx={{ fontSize: 40 }} />
         <div className="basketCount">
           <h3>{basketLength}</h3>

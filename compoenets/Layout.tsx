@@ -12,6 +12,7 @@ const Layout = ({ children }: any) => {
     setLocal(mylocal);
   }, []);
 
+  console.log(local)
   return (
     <>
       <div className="main_wrapper">
