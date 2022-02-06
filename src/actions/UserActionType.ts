@@ -1,14 +1,13 @@
-export const ADD_BASKETLIST = "ADD_BASKETLIST";
+export const ADD_NEWUSER = "ADD_NEWUSER";
 
-export interface BasketReducerPropType {
-  basket_id?: number|null;
-  product_id?: number;
-  order_id?: number|null;
-  quentity?: number;
-  price?:number;
+export interface UserReducerPropType {
+  user_id?: string;
+  name?: string;
+  password?:string;
+  address?:string|null;
 }
 
-export interface BasketSuccessDispatch {
+export interface UserSuccessDispatch {
   type:string;
-  payload: BasketReducerPropType[];
+  payload: UserReducerPropType;
 }

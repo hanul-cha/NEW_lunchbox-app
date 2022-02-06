@@ -1,4 +1,3 @@
-import { Dispatch } from "redux";
 import {
   ADD_BASKETLIST,
   BasketReducerPropType,
