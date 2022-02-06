@@ -5,12 +5,16 @@ import Link from "next/link";
 import BasketNav from "./basket/BasketNav";
 
 const Layout = ({ children }: any) => {
-  const [local, setLocal] = useState<string | undefined | null>();
+  const [local, setLocal] = useState<string | undefined | null>(null);
   
   useEffect(() => {
     const mylocal = window.localStorage.getItem("userName");
     setLocal(mylocal);
   }, []);
+  /* 
+  로컬값이 null이 아닌 그러니까 아이디가 있다면 loginAPI를 실행해 데이터(모든정보)을 가져와
+  action이랑 같이 전달해줌
+  */
 
   console.log(local)
   return (
