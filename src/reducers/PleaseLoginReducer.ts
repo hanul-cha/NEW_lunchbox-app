@@ -1,10 +1,10 @@
-import { PleasLoginActionDispatch, RUNLOGIN } from "../actions/PleasLoginAction";
+import { PleaseLoginActionDispatch, RUNLOGIN } from "../actions/PleasLoginAction";
 
 const initialState = false
 
 const PleasLoginReducer = (
   state: boolean = initialState,
-  action: PleasLoginActionDispatch
+  action: PleaseLoginActionDispatch
 ) => {
   switch (action.type) {
     case RUNLOGIN:

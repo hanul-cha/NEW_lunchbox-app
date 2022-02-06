@@ -3,8 +3,12 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BasketNav from "./basket/BasketNav";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../src/Store";
 
 const Layout = ({ children }: any) => {
+  const pleaseLoginReducer = useSelector((state:RootReducerType) => state.PleaseLoginReducer)
+
   const [local, setLocal] = useState<string | undefined | null>(null);
   
   useEffect(() => {
@@ -38,6 +42,10 @@ const Layout = ({ children }: any) => {
             </div>
           )}
         </div>
+
+        {pleaseLoginReducer && 
+          <div></div>
+        }
 
         <BasketNav />
 

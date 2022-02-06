@@ -1,15 +1,15 @@
 export const RUNLOGIN = "RUNLOGIN";
 
-export interface PleasLoginActionDispatch {
+export interface PleaseLoginActionDispatch {
   type:string;
   payload: boolean;
 }
 
-const PleasLoginAction = (pleas:boolean) => {
+const PleaseLoginAction = (please:boolean) => {
   return {
     type:RUNLOGIN,
-    payload:pleas
+    payload:please
   }
 };
 
-export default PleasLoginAction;
+export default PleaseLoginAction;
