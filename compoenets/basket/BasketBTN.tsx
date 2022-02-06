@@ -1,5 +1,8 @@
 import React from "react";
 import type { NextPage } from "next";
+import { useDispatch, useSelector } from "react-redux";
+import { RootReducerType } from "../../src/Store";
+import PleasLoginAction from "../../src/actions/PleasLoginAction";
 
 interface BasketType {
   basket_id?: number | null;
@@ -27,7 +30,9 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
   basketList,
   productList,
 }) => {
-    
+  const userReducer = useSelector((state:RootReducerType) => state.UserReducer.user)
+  const dispatch = useDispatch();
+  
   const totalPrice = basketList.reduce(function add(sum, currValue){
       if(typeof currValue.price === "number"){
         return sum + currValue.price
@@ -35,10 +40,12 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
           return 0
       }
   }, 0);
-  console.log(totalPrice);
+  console.log(userReducer);
 
   const runorder = () => {
-    
+    if(userReducer == null){
+      dispatch(PleasLoginAction(true));//로그인 한 유저가 없으면 팝업 활성화
+    }
   }
 
 
