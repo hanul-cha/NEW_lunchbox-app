@@ -82,6 +82,11 @@ const Basket: NextPage = () => {
         .mainDIV {
           padding: 20px;
         }
+        .mainDIV>h1 {
+          font-size:25px;
+          margin-bottom:15px;
+          font-weight:600;
+        }
         .basketWrapper {
           padding: 20px 0;
           padding-top: 0;

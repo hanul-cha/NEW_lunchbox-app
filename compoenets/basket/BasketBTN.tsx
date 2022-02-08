@@ -51,10 +51,26 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
 
   return (
     <>
-      <button onClick={runorder}>
+      <button className="basketBtn" onClick={runorder}>
         <h2>총 주문 금액 : {totalPrice}원</h2>
         <h2>주문하러 가기</h2>
       </button>
+      <style jsx>{`
+        .basketBtn {
+          width:100%;
+          border:none;
+          background:#00aaff;
+          border-radius:5px;
+          padding:20px
+        }  
+        .basketBtn h2 {
+          color:#fff;
+          font-size:20px;
+        }
+        .basketBtn h2:first-child {
+          margin-bottom:10px;
+        }
+      `}</style>
     </>
   );
 };

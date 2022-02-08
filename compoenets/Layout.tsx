@@ -8,10 +8,12 @@ import { RootReducerType } from "../src/Store";
 import PleaseLogin from "./PleaseLogin";
 
 const Layout = ({ children }: any) => {
-  const pleaseLoginReducer = useSelector((state:RootReducerType) => state.PleaseLoginReducer)
+  const pleaseLoginReducer = useSelector(
+    (state: RootReducerType) => state.PleaseLoginReducer
+  );
 
   const [local, setLocal] = useState<string | undefined | null>(null);
-  
+
   useEffect(() => {
     const mylocal = window.localStorage.getItem("userName");
     setLocal(mylocal);
@@ -21,9 +23,9 @@ const Layout = ({ children }: any) => {
   action이랑 같이 전달해줌
   */
 
-  console.log(local)
+  console.log(local);
 
-  console.log(pleaseLoginReducer)
+  console.log(pleaseLoginReducer);
   return (
     <>
       <div className="main_wrapper">
@@ -46,9 +48,11 @@ const Layout = ({ children }: any) => {
           )}
         </div>
 
-        {pleaseLoginReducer && 
-          <PleaseLogin />
-        }
+        {pleaseLoginReducer && (
+          <div className="popBack">
+            <PleaseLogin />
+          </div>
+        )}
 
         <BasketNav />
 
@@ -83,7 +87,7 @@ const Layout = ({ children }: any) => {
           position: fixed;
           bottom: 10px;
           margin-left: 10px;
-          background: #9AD0EC;
+          background: #9ad0ec;
           padding: 10px;
           border-radius: 50%;
           z-index: 1000;
@@ -94,10 +98,10 @@ const Layout = ({ children }: any) => {
           top: 15%;
           right: 15%;
           width: 25px;
-          height:25px;
+          height: 25px;
           display: grid;
           align-items: center;
-          border-radius: 50px
+          border-radius: 50px;
         }
         .basketCount h3 {
           font-size: 20px;
@@ -105,7 +109,7 @@ const Layout = ({ children }: any) => {
           font-weight: 600;
         }
         .header {
-          background: #9AD0EC;
+          background: #9ad0ec;
           border-radius: 0 0 20px 20px;
         }
         .main-logo {
@@ -129,7 +133,13 @@ const Layout = ({ children }: any) => {
           font-size: 40px;
           margin-right: -2px;
         }
-        
+        .popBack {
+          width:100%;
+          height:100%;
+          background-color: rgb(0, 0, 0, 0.7);
+          z-index:19000;
+          position:absolute;
+        }
       `}</style>
     </>
   );
