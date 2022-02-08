@@ -40,7 +40,7 @@ const Login: NextPage = () => {
       <div className="loginField">
         <TextField
           className="textField"
-          id="outlined-basic"
+          id="outlined-id"
           label="id"
           variant="outlined"
           placeholder="user id"
@@ -51,7 +51,7 @@ const Login: NextPage = () => {
 
         <TextField
           className="textField"
-          id="outlined-basic"
+          id="outlined-password"
           label="password"
           variant="outlined"
           name="psword"
@@ -70,6 +70,9 @@ const Login: NextPage = () => {
           테스트용 아이디로 로그인하기
         </Button>
       </div> */}
+      <style jsx>{`
+          
+        `}</style>
     </>
   );
 };

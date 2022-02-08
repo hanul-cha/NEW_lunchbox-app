@@ -1,7 +1,33 @@
-import React from 'react';
+import React from "react";
 
 const NottingBasket = () => {
-  return <div><h2>텅 비어있음</h2></div>;
+  return (
+    <>
+      <div className="notting">
+        <div>
+          <h2>텅!</h2>
+          <p>비어있네요</p>
+        </div>
+      </div>
+      <style jsx>{`
+        .notting {
+          display:grid;
+          align-items:center;
+          height:100vh;
+        }
+        .notting h2 {
+          font-size: 200px;
+          font-weight: 600;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .notting p {
+          text-align: center;
+          font-size: 40px;
+        }
+      `}</style>
+    </>
+  );
 };
 
 export default NottingBasket;
