@@ -5,6 +5,7 @@ import Link from "next/link";
 import BasketNav from "./basket/BasketNav";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
+import PleaseLogin from "./PleaseLogin";
 
 const Layout = ({ children }: any) => {
   const pleaseLoginReducer = useSelector((state:RootReducerType) => state.PleaseLoginReducer)
@@ -21,6 +22,8 @@ const Layout = ({ children }: any) => {
   */
 
   console.log(local)
+
+  console.log(pleaseLoginReducer)
   return (
     <>
       <div className="main_wrapper">
@@ -44,7 +47,7 @@ const Layout = ({ children }: any) => {
         </div>
 
         {pleaseLoginReducer && 
-          <div></div>
+          <PleaseLogin />
         }
 
         <BasketNav />

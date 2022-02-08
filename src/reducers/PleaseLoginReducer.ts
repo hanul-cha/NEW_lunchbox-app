@@ -1,4 +1,4 @@
-import { PleaseLoginActionDispatch, RUNLOGIN } from "../actions/PleasLoginAction";
+import { PleaseLoginActionDispatch, RUNLOGIN } from "../actions/PleaseLoginAction";
 
 const initialState = false
 
@@ -8,9 +8,7 @@ const PleasLoginReducer = (
 ) => {
   switch (action.type) {
     case RUNLOGIN:
-      return {
-        state:action.payload
-      };
+      return action.payload
     default:
       return state;
   }

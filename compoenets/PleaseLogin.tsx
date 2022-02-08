@@ -1,54 +1,53 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useRouter } from "next/router";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import { useDispatch } from "react-redux";
+import PleaseLoginAction from "../src/actions/PleaseLoginAction";
 
-interface MaterialMediaCardType {
-  info: {
-    explanation: string;
-    img: string;
-    name: string;
-    new_product: boolean;
-    price: number;
-    product_id: number;
-    product_type: string;
-  };
-}
-
-const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
-  const router = useRouter();
-  const runRoute = () => {
-    router.push(`/product/${info.product_id}`);
-  };
-
+const PleaseLogin = () => {
+    const dispatch = useDispatch();
+    const removePoP = () => {
+        dispatch(PleaseLoginAction(false));
+    }
   return (
     <>
-      <Card onClick={runRoute}>
-        <div className="materialCard">
-        <CardMedia
-          component="img"
-          height="140"
-          image={info.img}
-          alt={info.product_type + "이미지"}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {info.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {info.explanation}
-          </Typography>
-        </CardContent>
-        </div>
-      </Card>
+      <div className="pleaseLogin">
+        <Box
+          sx={{
+            "& > :not(style)": {
+              m: 0,
+              width: 400,
+              height: 500,
+            },
+          }}
+        >
+          <Paper elevation={1}>
+            <div className="pleaseLoginCard">
+              <h2>로그인이 필요한 서비스 입니다.</h2>
+              <p>로그인 하시겠습니까?</p>
+
+              <button onClick={removePoP}>취소</button>
+              <button>확인</button>
+            </div>
+          </Paper>
+        </Box>
+      </div>
       <style jsx>
         {`
-          .materialCard {
-            cursor: pointer;
+          .pleaseLogin {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20000;
+            width: 400px;
+            height: 500px;
+          }
+          .pleaseLoginCard {
+              padding:10px;
+          }
+          .pleaseLoginCard h2 {
+            font-size: 25px;
           }
         `}
       </style>
@@ -56,4 +55,4 @@ const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
   );
 };
 
-export default MaterialMediaCard;
+export default PleaseLogin;

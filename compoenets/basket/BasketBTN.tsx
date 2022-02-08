@@ -2,7 +2,7 @@ import React from "react";
 import type { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../../src/Store";
-import PleasLoginAction from "../../src/actions/PleasLoginAction";
+import PleaseLoginAction from "../../src/actions/PleaseLoginAction";
 
 interface BasketType {
   basket_id?: number | null;
@@ -44,7 +44,7 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
 
   const runorder = () => {
     if(userReducer == null){
-      dispatch(PleasLoginAction(true));//로그인 한 유저가 없으면 팝업 활성화
+      dispatch(PleaseLoginAction(true));//로그인 한 유저가 없으면 팝업 활성화
     }
   }
 
