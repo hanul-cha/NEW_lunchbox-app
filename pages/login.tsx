@@ -5,6 +5,7 @@ import { TextField, Button, Alert, AlertTitle } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
 import axios from "axios";
+import RunLogin from "../src/moduls/login/runLogin";
 
 const Login: NextPage = () => {
   const [id, setId] = useState("");
@@ -25,13 +26,10 @@ const Login: NextPage = () => {
       setFailAlert(false);
     };
   }, []);
-  const pushBtn = () => {
-    axios.post('/api/runLogin/id', {
-      id,
-      psword
-    }).then(res => {
-      console.log(res)
-    })
+  const pushBtn = async () => {
+    const runLoginCheck = new RunLogin({id, psword});
+    const response = await runLoginCheck.getUser();
+    console.log(response)
   }
   const pushRemoveBtn = () => {
     

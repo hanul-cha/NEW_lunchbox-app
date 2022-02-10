@@ -14,17 +14,17 @@ export default async function getUser(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  /* console.log(req.body) */
+  console.log(req.body.id)
   /* return res.status(200).json({test:"test"}) */
   return new Promise((resolve, reject) => {
     client.query(
-      `SELECT * FROM box_user WHERE user_id = ${req.body.id}`,
+      `SELECT * FROM box_user WHERE user_id = '${req.body.id}'`,
       (err, result) => {
         if (err) {
-          reject(`${err}`);
+          reject(res.status(200).json({success:false}));//이거 정의 에러나옴
         } else {
           const userLIst = result.rows;
-          resolve(res.status(200).json({ userLIst }));
+          resolve(res.status(200).json({success:true ,userLIst }));
         }
       }
     );
