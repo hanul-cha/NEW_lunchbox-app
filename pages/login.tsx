@@ -13,7 +13,7 @@ const Login: NextPage = () => {
   const userReducer = useSelector((state:RootReducerType) => state.UserReducer)
   /* const dispatch = useDispatch();
   dispatch(BasketAction([addBasketList])); */
-  console.log(userReducer)
+  /* console.log(userReducer) */ //로그인 정보가 들어있는 리듀서
 
   setTimeout(() => {
     setFailAlert(false);
@@ -25,7 +25,7 @@ const Login: NextPage = () => {
     };
   }, []);
   const pushBtn = () => {
-
+    console.log(id, psword)
   }
 
   return (
