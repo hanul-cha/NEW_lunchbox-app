@@ -4,6 +4,7 @@ import GlobalTitle from "../compoenets/GlobalTitle";
 import { TextField, Button, Alert, AlertTitle } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
+import axios from "axios";
 
 const Login: NextPage = () => {
   const [id, setId] = useState("");
@@ -25,7 +26,15 @@ const Login: NextPage = () => {
     };
   }, []);
   const pushBtn = () => {
-    console.log(id, psword)
+    axios.post('/api/runLogin/id', {
+      id,
+      psword
+    }).then(res => {
+      console.log(res)
+    })
+  }
+  const pushRemoveBtn = () => {
+    
   }
 
   return (
@@ -63,6 +72,9 @@ const Login: NextPage = () => {
 
         <Button className="login_btn" variant="outlined" onClick={pushBtn}>
           login
+        </Button>
+        <Button className="login_btn" variant="outlined" onClick={pushRemoveBtn}>
+          탈퇴
         </Button>
       </div>
       {/* <div className="runLoginTestWrapper">

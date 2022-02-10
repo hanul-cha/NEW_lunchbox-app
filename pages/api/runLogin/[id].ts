@@ -6,7 +6,7 @@ client.connect((err) => {
   if (err) {
     console.error("connection error");
   } else {
-    console.log("success!");
+    console.log("runlogin-api success!");
   }
 });
 
@@ -14,18 +14,28 @@ export default async function getUser(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  /* console.log(req.body) */
+  /* return res.status(200).json({test:"test"}) */
   return new Promise((resolve, reject) => {
-    client.query("SELECT * FROM box_user", (err, result) => {
-      if (err) {
-        reject(`${err}`);
-      } else {
-        const userLIst = result.rows;
-        resolve(res.status(200).json({ userLIst }));
+    client.query(
+      `SELECT * FROM box_user WHERE user_id = ${req.body.id}`,
+      (err, result) => {
+        if (err) {
+          reject(`${err}`);
+        } else {
+          const userLIst = result.rows;
+          resolve(res.status(200).json({ userLIst }));
+        }
       }
-    });
+    );
   });
 }
 
+/* 
+02.10 테스트 api를 만들것임
+fetch delet 로 쿼리 없이 사라지나 테스트
+아니라면 씁 유감
+*/
 
 /* 
 해당 api는 runlogin과 데이터를 주고 받으면서 로그인 로직을 구현할것임

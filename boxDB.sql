@@ -6,6 +6,11 @@ CREATE TABLE "box_user" (
   "address" TEXT,
   PRIMARY KEY ("user_id")
 );
+CREATE TABLE "test_user" (
+  "test_user_id" TEXT NOT NULL,
+  "test_user_password" TEXT NOT NULL,
+  PRIMARY KEY ("test_user_id")
+);
 
 CREATE TABLE "product_list" (
   "product_id" SERIAL,
@@ -37,6 +42,12 @@ INSERT INTO "box_user" (
 	'박석규',
 	'123456',
     '경기도 안산시 상록구'
+);
+INSERT INTO "test_user" (
+	test_user_id, test_user_password
+) VALUES (
+	"test1",
+    "1234"
 );
 
 INSERT INTO "product_list" (
