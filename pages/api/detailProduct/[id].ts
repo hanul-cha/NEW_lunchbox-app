@@ -1,11 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { useRouter } from "next/router";
 import { client } from "../../../src/server/restFul";
 
 client.connect((err) => {
   if (err) {
-    console.error("connection error");
+    console.error("deail connection error");
   } else {
     console.log("success!");
   }

@@ -2,24 +2,30 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import GlobalTitle from "../compoenets/GlobalTitle";
 import { TextField, Button, Alert, AlertTitle } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
-import axios from "axios";
 import RunLogin from "../src/moduls/login/runLogin";
+import UserAction from "../src/actions/UserAction";
 
 const Login: NextPage = () => {
   const [id, setId] = useState("");
   const [psword, setpsword] = useState("");
   const [failAlert, setFailAlert] = useState(false);
 
-  const userReducer = useSelector((state:RootReducerType) => state.UserReducer)
-  /* const dispatch = useDispatch();
-  dispatch(BasketAction([addBasketList])); */
+  const userReducer = useSelector(
+    (state: RootReducerType) => state.UserReducer
+  );
+  const dispatch = useDispatch();
+
   /* console.log(userReducer) */ //로그인 정보가 들어있는 리듀서
 
-  setTimeout(() => {
-    setFailAlert(false);
-  }, 3000);
+  useEffect(() => {
+    if (failAlert) {
+      setTimeout(() => {
+        setFailAlert(false);
+      }, 3000);
+    }
+  }, [failAlert]);
 
   useEffect(() => {
     return () => {
@@ -27,22 +33,28 @@ const Login: NextPage = () => {
     };
   }, []);
   const pushBtn = async () => {
-    const runLoginCheck = new RunLogin({id, psword});
+    const runLoginCheck = new RunLogin({ id, psword });
     const response = await runLoginCheck.getUser();
-    console.log(response)
-  }
-  const pushRemoveBtn = () => {
-    
-  }
+    console.log(response);
+    if (response.success && response.data) {
+      //로그인 성공
+      dispatch(UserAction(response.data));
+    } else {
+      setFailAlert(true);
+    }
+  };
+  const pushRemoveBtn = () => {};
 
   return (
     <>
       <GlobalTitle title="Login" />
       {failAlert && (
-        <Alert severity="error">
-        <AlertTitle>로그인 실패</AlertTitle>
-        <strong>아이디 또는 비밀번호를 확인해 주세요</strong>
-      </Alert>
+        <div className="login_fail">
+          <Alert severity="error" sx={{ width: "100%-32px" }}>
+            <AlertTitle>로그인 실패</AlertTitle>
+            <strong>아이디 또는 비밀번호를 확인해 주세요</strong>
+          </Alert>
+        </div>
       )}
       <div className="loginField">
         <TextField
@@ -71,7 +83,11 @@ const Login: NextPage = () => {
         <Button className="login_btn" variant="outlined" onClick={pushBtn}>
           login
         </Button>
-        <Button className="login_btn" variant="outlined" onClick={pushRemoveBtn}>
+        <Button
+          className="login_btn"
+          variant="outlined"
+          onClick={pushRemoveBtn}
+        >
           탈퇴
         </Button>
       </div>
@@ -81,8 +97,16 @@ const Login: NextPage = () => {
         </Button>
       </div> */}
       <style jsx>{`
-          
-        `}</style>
+        .login_fail {
+          position: absolute;
+          max-width: 600px;
+          width: 100%;
+          z-index: 1000;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      `}</style>
     </>
   );
 };

@@ -5,6 +5,7 @@ export interface UserReducerPropType {
   name?: string;
   password?:string;
   address?:string|null;
+  joinday?:string;
 }
 
 export interface UserSuccessDispatch {

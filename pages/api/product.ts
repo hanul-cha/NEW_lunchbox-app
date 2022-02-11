@@ -4,7 +4,7 @@ import { client } from "../../src/server/restFul";
 
 client.connect((err) => {
   if (err) {
-    console.error("connection error");
+    console.error("product connection error");
   } else {
     console.log("success!");
   }
