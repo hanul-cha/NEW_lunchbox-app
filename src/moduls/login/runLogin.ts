@@ -5,12 +5,11 @@ type RunLoginBodyType = {
   psword?: string;
 };
 interface ArrayType {
-    
-        user_id: string;
-        password: string;
-        name:string;
-        joinday:string;
-        address?:string|null
+  user_id: string;
+  password: string;
+  name: string;
+  joinday: string;
+  address?: string | null;
 }
 type GetUserType = {
   success: boolean;
@@ -30,9 +29,9 @@ class RunLogin {
       .post("/api/runLogin/id", {
         id: client.id,
       })
-      .then((res: AxiosResponse<GetUserType, any>) => {
+      .then((res: AxiosResponse<GetUserType>) => {
         console.log(res.data);
-        if (res.data.success && res.data.userLIst) {
+        if (res.data.success && res.data.userLIst && res.data.userLIst?.length !== 0) {
           if (res.data.userLIst[0].password == client.psword) {
             return {
               success: true,
