@@ -3,29 +3,36 @@ import LocalDiningIcon from "@mui/icons-material/LocalDining";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BasketNav from "./basket/BasketNav";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
 import PleaseLogin from "./PleaseLogin";
+import UserAction from "../src/actions/UserAction";
 
 const Layout = ({ children }: any) => {
   const pleaseLoginReducer = useSelector(
     (state: RootReducerType) => state.PleaseLoginReducer
+  );//로그인 해달라는 모달창을 띄울지 말지 결정할 리듀서
+  const userReducer = useSelector(
+    (state: RootReducerType) => state.UserReducer.user
   );
+  const dispatch = useDispatch();
 
   const [local, setLocal] = useState<string | undefined | null>(null);
 
   useEffect(() => {
-    const mylocal = window.localStorage.getItem("userName");
-    setLocal(mylocal);
+    const useLocal = window.localStorage.getItem("userInfo")
+    if(useLocal) {
+      const mylocal = JSON.parse(useLocal);
+      dispatch(UserAction(mylocal))
+    }
   }, []);
   /* 
-  로컬값이 null이 아닌 그러니까 아이디가 있다면 loginAPI를 실행해 데이터(모든정보)을 가져와
-  action이랑 같이 전달해줌
+  로컬검사를 하고 있으면 액션으로 디스패치 해준다
   */
 
-  console.log(local);
+  console.log(userReducer);//이걸로 로그인 여부를 검사할것임
+  //로그아웃 부터 만들고 그다음 장바구니에서 리스트 빼기 구현
 
-  console.log(pleaseLoginReducer);
   return (
     <>
       <div className="main_wrapper">
