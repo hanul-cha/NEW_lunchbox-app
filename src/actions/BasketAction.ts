@@ -1,14 +1,19 @@
 import {
   ADD_BASKETLIST,
+  REMOVE_BASKETLIST,
   BasketReducerPropType,
   BasketSuccessDispatch,
 } from "./BasketActionType";
 
-const BasketAction = (AddBasketList: BasketReducerPropType[]) => {
+export const BasketAction = (AddBasketList: BasketReducerPropType[]) => {
   return {
     type:ADD_BASKETLIST,
     payload:AddBasketList
   }
 };
-
-export default BasketAction;
+export const PutBasketAction = (removeItem: number) => {
+  return {
+    type:REMOVE_BASKETLIST,
+    payload:removeItem
+  }
+};

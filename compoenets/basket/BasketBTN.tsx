@@ -40,7 +40,7 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
           return 0
       }
   }, 0);
-  console.log(userReducer);
+  /* console.log(userReducer); */
 
   const runorder = () => {
     if(userReducer == null){

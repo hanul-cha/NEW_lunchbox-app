@@ -12,7 +12,7 @@ import { CardActionArea } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import DoNotDisturbOffOutlinedIcon from "@mui/icons-material/DoNotDisturbOffOutlined";
-import BasketAction from "../../src/actions/BasketAction";
+import {BasketAction} from "../../src/actions/BasketAction";
 
 interface productListType {
   explanation: string;

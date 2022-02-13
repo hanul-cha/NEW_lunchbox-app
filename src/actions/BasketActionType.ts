@@ -1,4 +1,5 @@
 export const ADD_BASKETLIST = "ADD_BASKETLIST";
+export const REMOVE_BASKETLIST = "REMOVE_BASKETLIST";
 
 export interface BasketReducerPropType {
   basket_id?: number|null;
@@ -10,5 +11,6 @@ export interface BasketReducerPropType {
 
 export interface BasketSuccessDispatch {
   type:string;
-  payload: BasketReducerPropType[];
+  payload: BasketReducerPropType[]|number;
 }
+

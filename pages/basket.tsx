@@ -9,8 +9,18 @@ import CardMedia from "@mui/material/CardMedia";
 import BasketBTN from "../compoenets/basket/BasketBTN";
 import NottingBasket from "../compoenets/basket/NottingBasket";
 
+interface AllListType {
+  explanation: string;
+  img: string;
+  name: string;
+  new_product: boolean;
+  price: number;
+  product_id: number;
+  product_type: string;
+}
+
 const Basket: NextPage = () => {
-  const [allList, setAllList] = useState<any[]>([]);
+  const [allList, setAllList] = useState<AllListType[]>([]);
   const basketReducer = useSelector(
     (state: RootReducerType) => state.BasketReducer
   );
@@ -32,11 +42,15 @@ const Basket: NextPage = () => {
     });
   }, []);
 
-  /* console.log(basketReducer);
+  console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
   //주문표에 있는 id로 만든 제품 리스트
-  */
+
+  const removeBasketList = (productId:number) => {
+    console.log(productId)
+  }
+ 
 
   return (
     <>
@@ -64,6 +78,7 @@ const Basket: NextPage = () => {
                         <h2>{list.name}</h2>
                         <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
                         <p>가격 :{basketReducer?.basketList[i]?.price}</p>
+                        <button onClick={(e) => {removeBasketList(list.product_id)}}>장바구니에서 제거</button>
                       </div>
                     </div>
                   </Card>

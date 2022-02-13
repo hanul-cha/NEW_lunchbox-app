@@ -28,8 +28,7 @@ const Layout = ({ children }: any) => {
   로컬검사를 하고 있으면 액션으로 디스패치 해준다
   */
  
-  console.log(userReducer);//이걸로 로그인 여부를 검사할것임
-  //로그아웃 부터 만들고 그다음 장바구니에서 리스트 빼기 구현
+  /* console.log(userReducer); */ //이걸로 로그인 여부를 검사할것임
 
   return (
     <>
