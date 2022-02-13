@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
 import RunLogin from "../src/moduls/login/runLogin";
 import UserAction from "../src/actions/UserAction";
+import { useRouter } from "next/router";
 
 const Login: NextPage = () => {
   const [id, setId] = useState("");
@@ -16,6 +17,7 @@ const Login: NextPage = () => {
     (state: RootReducerType) => state.UserReducer
   );
   const dispatch = useDispatch();
+  const route = useRouter();
 
   /* console.log(userReducer) */ //로그인 정보가 들어있는 리듀서
 
@@ -39,7 +41,8 @@ const Login: NextPage = () => {
     if (response.success && response.data) {
       //로그인 성공
       dispatch(UserAction(response.data));
-      window.localStorage.setItem("userInfo", JSON.stringify(response.data))
+      window.localStorage.setItem("userInfo", JSON.stringify(response.data));
+      route.back();
     } else {
       setFailAlert(true);
     }
