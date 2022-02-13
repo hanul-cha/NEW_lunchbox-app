@@ -1,6 +1,6 @@
 import GlobalTitle from "../compoenets/GlobalTitle";
 import type { NextPage } from "next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../src/Store";
 import { useState, useEffect } from "react";
 
@@ -8,6 +8,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import BasketBTN from "../compoenets/basket/BasketBTN";
 import NottingBasket from "../compoenets/basket/NottingBasket";
+import { PutBasketAction } from "../src/actions/BasketAction";
 
 interface AllListType {
   explanation: string;
@@ -25,8 +26,11 @@ const Basket: NextPage = () => {
     (state: RootReducerType) => state.BasketReducer
   );
 
+  const dispatch = useDispatch();
+
   /* console.log(basketReducer); */
   useEffect(() => {
+    setAllList([])//초기화
     basketReducer.basketList.map((basketItem) => {
       if (basketItem.product_id) {
         const getchDetailProduct = async (id: number) => {
@@ -48,8 +52,12 @@ const Basket: NextPage = () => {
   //주문표에 있는 id로 만든 제품 리스트
 
   const removeBasketList = (productId:number) => {
-    console.log(productId)
-  }
+    dispatch(PutBasketAction(productId))
+    const newAllList = allList.filter(
+      (item) => item.product_id !== productId
+    );
+    setAllList(newAllList)
+  }//제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
  
 
   return (

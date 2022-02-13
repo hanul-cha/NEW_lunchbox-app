@@ -26,9 +26,11 @@ const BasketReducer = (
         ...state,
       };
     case REMOVE_BASKETLIST:
+      console.log(state.basketList)
       const newState = state.basketList.filter(
-        (type) => type.order_id !== action.payload
+        (type) => type.product_id !== action.payload
       );
+      console.log(newState)
       state.basketList = newState
       return {
         ...state,
