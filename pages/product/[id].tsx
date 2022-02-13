@@ -30,6 +30,14 @@ interface allProductType {
   };
 } //현재 페이지 props type
 
+interface LocalItemType {
+  basket_id?: number|null;
+  product_id?: number;
+  order_id?: number|null;
+  quentity?: number;
+  price?:number;
+}
+
 const Product: NextPage<allProductType> = ({ product }) => {
   const [productCount, setProductCount] = useState(1);
   /* const testReducer = useSelector((state:RootReducerType) =>state.ProductReducer)
@@ -66,10 +74,27 @@ const Product: NextPage<allProductType> = ({ product }) => {
       quentity: productCount,
       price:productCount * productInfo.price
     };
-
     dispatch(BasketAction([addBasketList]));
+
+    const useLocal = window.localStorage.getItem("guestBasket")
+    if(useLocal) {
+      const myLocal:LocalItemType[] = JSON.parse(useLocal);
+      
+      const newLocal = [
+        ...myLocal,
+        addBasketList
+      ]
+      console.log(newLocal)
+      window.localStorage.setItem("guestBasket", JSON.stringify(newLocal))
+    }
+    
     route.push("/allProduct")
   };
+  /* 
+  장바구니에 추가하면
+  새로운 배열을 만들어액션으로 넘겨주고
+  로컬스토리지에도 추가해준다
+  */
 
   return (
     <>

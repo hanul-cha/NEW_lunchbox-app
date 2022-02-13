@@ -1,12 +1,21 @@
 import React, { useEffect } from "react";
 import CardTravelIcon from "@mui/icons-material/CardTravel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../../src/Store";
 import { useRouter } from "next/router";
+
+interface LocalItemType {
+  basket_id?: number|null;
+  product_id?: number;
+  order_id?: number|null;
+  quentity?: number;
+  price?:number;
+}
 
 const BasketNav = () => {
   const route = useRouter()
   const basketReducer = useSelector((state:RootReducerType) => state.BasketReducer)
+  const dispatch = useDispatch()
   
   const pushBasket = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault()
@@ -16,6 +25,16 @@ const BasketNav = () => {
   const basketLength = basketReducer.basketList.length
   //담긴 배열의 길이로 장바구니 숫자를 구현
   /* console.log(basketReducer.basketList) */
+
+  useEffect(() => {
+    const useLocal = window.localStorage.getItem("guestBasket")
+    if(useLocal){
+      const myLocal:LocalItemType[] = JSON.parse(useLocal);
+      if(myLocal.length !== 0){
+        console.log(myLocal)
+      }
+    }
+  },[])
   return (
     <>
       <div className="basket" onClick={e => pushBasket(e)}>

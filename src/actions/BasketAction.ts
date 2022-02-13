@@ -2,7 +2,6 @@ import {
   ADD_BASKETLIST,
   REMOVE_BASKETLIST,
   BasketReducerPropType,
-  BasketSuccessDispatch,
 } from "./BasketActionType";
 
 export const BasketAction = (AddBasketList: BasketReducerPropType[]) => {
