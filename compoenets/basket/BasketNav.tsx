@@ -3,6 +3,7 @@ import CardTravelIcon from "@mui/icons-material/CardTravel";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../../src/Store";
 import { useRouter } from "next/router";
+import { BasketAction } from "../../src/actions/BasketAction";
 
 interface LocalItemType {
   basket_id?: number|null;
@@ -31,10 +32,12 @@ const BasketNav = () => {
     if(useLocal){
       const myLocal:LocalItemType[] = JSON.parse(useLocal);
       if(myLocal.length !== 0){
-        console.log(myLocal)
+        console.log(myLocal)//액션에 넣어줄 공간
+        dispatch(BasketAction(myLocal))
       }
     }
   },[])
+
   return (
     <>
       <div className="basket" onClick={e => pushBasket(e)}>

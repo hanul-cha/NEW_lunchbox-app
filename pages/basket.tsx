@@ -45,10 +45,10 @@ const Basket: NextPage = () => {
     });
   }, []);
 
-  /* console.log(basketReducer);
+  console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
-  //주문표에 있는 id로 만든 제품 리스트 */
+  //주문표에 있는 id로 만든 제품 리스트
 
   const removeBasketList = (productId:number) => {
     dispatch(PutBasketAction(productId))
@@ -59,7 +59,7 @@ const Basket: NextPage = () => {
   }//제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
 
   useEffect(() => {
-    const useLocal = window.localStorage.getItem("guestBasket")
+    /* const useLocal = window.localStorage.getItem("guestBasket") */
     window.localStorage.setItem("guestBasket", JSON.stringify(basketReducer.basketList));
   },[basketReducer.basketList]);
   //제거 버튼을 누리면 리듀서가 바뀌니 그후 반응해 로컬 스토리지에 추가해준다
