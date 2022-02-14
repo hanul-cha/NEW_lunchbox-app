@@ -57,6 +57,11 @@ const Basket: NextPage = () => {
         };
         getchDetailProduct(basketItem.product_id);
       }
+      const sortAllList = allList.sort((a, b) => {
+        return a.printNum - b.printNum
+      })
+      console.log(sortAllList)
+      //이벤트 루프 비동기로인해 생기는 정렬문제 해결
     });
   }, []);
 
@@ -156,3 +161,12 @@ const Basket: NextPage = () => {
 };
 
 export default Basket;
+
+/* 
+장바구니 리듀서에 있는 값들을 가져와서 새로운 리스트를 만들때 가끔씩
+순서가 안맞을때가 있다 발현 조건은 매우매우 다른거로봐서 네트워크 환경에 따라
+비동기처리 스택에 들어오는 속도가 달라서 발생하는 이벤트 루프 문제로 보인다.
+sort메서드로 해결중...
+
+이후 삭제 로직을 렌덤 숫자를 부여해 삭제 해야할듯 싶다.
+*/
