@@ -57,3 +57,4 @@ const MaterialMediaCard = ({ info }: MaterialMediaCardType) => {
 };
 
 export default MaterialMediaCard;
+//카드들을 보여줄 컴포넌트

@@ -28,12 +28,15 @@ const Login: NextPage = () => {
       }, 3000);
     }
   }, [failAlert]);
+  //실패 알람이 나오고나서 3초뒤에 꺼주는 useEffect
 
   useEffect(() => {
     return () => {
       setFailAlert(false);
     };
   }, []);
+  //언마운트시 콜백함수를 큐에서 지워주기 위한 클린함수
+
   const pushBtn = async () => {
     const runLoginCheck = new RunLogin({ id, psword });
     const response = await runLoginCheck.getUser();
@@ -43,10 +46,16 @@ const Login: NextPage = () => {
       dispatch(UserAction(response.data));
       window.localStorage.setItem("userInfo", JSON.stringify(response.data));
       route.back();
+      //유저정보를 리듀서와 로컬스토리지에 할당한후 뒤로 보내줌
     } else {
       setFailAlert(true);
     }
   };
+  /* 
+  로그인 버튼을 눌렀을 때 id와 ps를 인자로 넘겨주어 클래스를 생성함
+  getuser메서드를 비동기로 호출해 검사를 받아 리턴 받아온 값으로
+  로그인 시킬지 알람을 켜줄지 결정함
+  */
 
   return (
     <>

@@ -52,12 +52,13 @@ const Product: NextPage<allProductType> = ({ product }) => {
 
   const addCount = () => {
     setProductCount(productCount + 1);
-  };
+  };//수량추가후 보여질 숫자
   const removeCount = () => {
     if (productCount !== 1) {
       setProductCount(productCount - 1);
     }
-  };
+  };//1보다 낮은 수량을 선택할수 없게 막음
+
 
   const productInfo = product.productList[0];
   /* const basketReducer = useSelector(
@@ -78,6 +79,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
       random
     };
     dispatch(BasketAction([addBasketList]));
+    //주문표에 추가할 오브젝트를 액션으로 보내 추가해줌
 
     const useLocal = window.localStorage.getItem("guestBasket")
     if(useLocal) {
@@ -92,7 +94,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
     }
     
     route.push("/allProduct")
-  };
+  };//로컬에 할당
   /* 
   장바구니에 추가하면
   새로운 배열을 만들어액션으로 넘겨주고

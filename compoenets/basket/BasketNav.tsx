@@ -11,6 +11,7 @@ interface LocalItemType {
   order_id?: number|null;
   quentity?: number;
   price?:number;
+  random:number;
 }
 
 const BasketNav = () => {
@@ -32,11 +33,12 @@ const BasketNav = () => {
     if(useLocal){
       const myLocal:LocalItemType[] = JSON.parse(useLocal);
       if(myLocal.length !== 0){
-        console.log(myLocal)//액션에 넣어줄 공간
+        /* console.log(myLocal) */ //액션에 넣어줄 공간
         dispatch(BasketAction(myLocal))
       }
     }
   },[])
+  //로컬에 저장된 장바구니가 있다면 파싱해서 액션으로 보내줄것임
 
   return (
     <>

@@ -31,3 +31,4 @@ const NottingBasket = () => {
 };
 
 export default NottingBasket;
+//장바구니에 아무것도 없을 때 노출시킬 컴포넌트

@@ -42,6 +42,7 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
           return 0
       }
   }, 0);
+  //모든 주문금액을 관리할 변수
   /* console.log(userReducer); */
 
   const runorder = () => {

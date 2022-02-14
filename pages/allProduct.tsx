@@ -49,26 +49,26 @@ function a11yProps(index: number) {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
-}
+}//material 옵션
 
 const AllProduct: NextPage<allProductType> = ({ allproduction }) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-  };
+  };//메뉴 네비
 
   const noodleList = allproduction.productList.filter(
     (type) => type.product_type == "noodle"
-  );
+  );//면요리 타입이 담긴 리스트
 
   const riceList = allproduction.productList.filter(
     (type) => type.product_type == "rice"
-  );
+  );//쌀요리 타입이 담긴 리스트
 
   const drinkList = allproduction.productList.filter(
     (type) => type.product_type == "drink"
-  );
+  );//마실것
   //제품들을 타입별로 걸러줄 필터함수
   return (
     <>
@@ -140,4 +140,4 @@ export const getServerSideProps = async () => {
       allproduction,
     },
   };
-};
+};//ssr 모든 제품을 불러옴

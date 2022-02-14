@@ -151,3 +151,7 @@ const Layout = ({ children }: any) => {
 };
 
 export default Layout;
+/* 
+전체적으로 관리해줄 것들이 다들어있음
+여기서 로컬검사를 하고 모든 컴포넌트에서 사용할 유저리듀서에 추가해준다
+*/

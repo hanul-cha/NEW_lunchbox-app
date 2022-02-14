@@ -41,7 +41,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-/* 
-위에 userInfo로 값 바뀌는것들 싹다 테스트 해봐야함
-*/

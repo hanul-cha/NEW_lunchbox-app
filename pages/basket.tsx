@@ -54,7 +54,7 @@ const Basket: NextPage = () => {
           const sortAllList = newState.sort((a, b) => {
             return a.printNum - b.printNum;
           });
-          //이벤트 루프 비동기로인해 생기는 정렬문제를 내림차순으로 재할당해서 리턴해줌
+          //내림차순으로 재할당해서 리턴해줌
           return sortAllList
         });
       });
@@ -66,14 +66,16 @@ const Basket: NextPage = () => {
       basketReducer.basketList.map((basketItem, i) => {
         if (basketItem.product_id) {
           getchDetailProduct(basketItem, i);
+          //인덱스 수만큼 함수 실행
         }
       });
   }, []);
 
-  console.log(basketReducer);
+  /* console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
   //주문표에 있는 id로 만든 제품 리스트
+  */ //확인하고 싶을때 풀자
 
   const removeBasketList = (randomNum: number) => {
     dispatch(PutBasketAction(randomNum));
@@ -88,7 +90,7 @@ const Basket: NextPage = () => {
       JSON.stringify(basketReducer.basketList)
     );
   }, [basketReducer.basketList]);
-  //제거 버튼을 누리면 리듀서가 바뀌니 그후 반응해 로컬 스토리지에 추가해준다
+  //제거 버튼을 누르면 리듀서가 바뀌니 그후 반응해 로컬 스토리지에 추가해준다
 
   return (
     <>
