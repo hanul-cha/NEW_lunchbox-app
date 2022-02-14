@@ -9,8 +9,9 @@ import CardMedia from "@mui/material/CardMedia";
 import BasketBTN from "../compoenets/basket/BasketBTN";
 import NottingBasket from "../compoenets/basket/NottingBasket";
 import { PutBasketAction } from "../src/actions/BasketAction";
+import axios, { AxiosResponse } from "axios";
 
-interface AllListType {
+interface AxiosResType {
   explanation: string;
   img: string;
   name: string;
@@ -18,6 +19,14 @@ interface AllListType {
   price: number;
   product_id: number;
   product_type: string;
+}
+
+interface AllListType extends AxiosResType {
+  printNum:number
+}
+
+interface AxiosPropType {
+  productList:AxiosResType[]
 }
 
 const Basket: NextPage = () => {
@@ -31,14 +40,20 @@ const Basket: NextPage = () => {
 
   useEffect(() => {
     setAllList([])//초기화
-    basketReducer.basketList.map((basketItem) => {
+    basketReducer.basketList.map((basketItem,i) => {
       if (basketItem.product_id) {
         const getchDetailProduct = async (id: number) => {
-          const product = await (
-            await fetch(`http://localhost:3000/api/detailProduct/${id}`)
-          ).json();
+
+          await axios.get(`http://localhost:3000/api/detailProduct/${id}`)
+          .then((res:AxiosResponse<AxiosPropType>) => {
+            const addRes = {
+              ...res.data.productList[0],
+              printNum:i
+            }
+            
+            setAllList((state) => [...state, addRes])
+          })
           /* console.log(product.productList[0]) */
-          setAllList((state) => [...state, product.productList[0]]);
         };
         getchDetailProduct(basketItem.product_id);
       }
@@ -50,10 +65,10 @@ const Basket: NextPage = () => {
   console.log(allList);
   //주문표에 있는 id로 만든 제품 리스트
 
-  const removeBasketList = (productId:number) => {
-    dispatch(PutBasketAction(productId))
+  const removeBasketList = (printNum:number) => {
+    dispatch(PutBasketAction(printNum))
     const newAllList = allList.filter(
-      (item) => item.product_id !== productId
+      (item) => item.printNum !== printNum
     );
     setAllList(newAllList)
   }//제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
@@ -76,7 +91,7 @@ const Basket: NextPage = () => {
           <div className="basket">
             {allList.map((list, i) => {
               return (
-                <div key={i + 1} className="basketWrapper">
+                <div key={i} className="basketWrapper">
                   <Card>
                     <div className="basketCard">
                       <div className="basketCardImg">
@@ -91,7 +106,7 @@ const Basket: NextPage = () => {
                         <h2>{list.name}</h2>
                         <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
                         <p>가격 :{basketReducer?.basketList[i]?.price}</p>
-                        <button onClick={(e) => {removeBasketList(list.product_id)}}>장바구니에서 제거</button>
+                        <button onClick={(e) => {removeBasketList(list.printNum)}}>장바구니에서 제거</button>
                       </div>
                     </div>
                   </Card>
