@@ -89,7 +89,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
         ...myLocal,
         addBasketList
       ]
-      console.log(newLocal)
+      /* console.log(newLocal) */ //콘솔에서 장바구니 스토리지 확인할 때 사용
       window.localStorage.setItem("guestBasket", JSON.stringify(newLocal))
     }
     
@@ -224,4 +224,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       product,
     },
   };
-};
+};//아이디에 맞는 제품을 가져온다

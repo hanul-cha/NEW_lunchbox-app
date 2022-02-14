@@ -24,7 +24,7 @@ interface AxiosResType {
 
 interface AllListType extends AxiosResType {
   printNum: number;
-  random:number;
+  random: number;
 }
 
 interface AxiosPropType {
@@ -40,22 +40,25 @@ const Basket: NextPage = () => {
   const dispatch = useDispatch();
   /* console.log(basketReducer); */
 
-  const getchDetailProduct = async (basketItem: BasketReducerPropType, i: number) => {
+  const getchDetailProduct = async (
+    basketItem: BasketReducerPropType,
+    i: number
+  ) => {
     await axios
       .get(`http://localhost:3000/api/detailProduct/${basketItem.product_id}`)
       .then((res: AxiosResponse<AxiosPropType>) => {
         const addRes = {
           ...res.data.productList[0],
           printNum: i,
-          random:basketItem.random 
-        };//비동기로 받은 제품정보에 더해줄 key
+          random: basketItem.random,
+        }; //비동기로 받은 제품정보에 더해줄 key
         setAllList((state) => {
-          const newState = [...state, addRes]
+          const newState = [...state, addRes];
           const sortAllList = newState.sort((a, b) => {
             return a.printNum - b.printNum;
           });
           //내림차순으로 재할당해서 리턴해줌
-          return sortAllList
+          return sortAllList;
         });
       });
     /* console.log(product.productList[0]) */
@@ -63,12 +66,12 @@ const Basket: NextPage = () => {
 
   useEffect(() => {
     setAllList([]); //초기화
-      basketReducer.basketList.map((basketItem, i) => {
-        if (basketItem.product_id) {
-          getchDetailProduct(basketItem, i);
-          //인덱스 수만큼 함수 실행
-        }
-      });
+    basketReducer.basketList.map((basketItem, i) => {
+      if (basketItem.product_id) {
+        getchDetailProduct(basketItem, i);
+        //인덱스 수만큼 함수 실행
+      }
+    });
   }, []);
 
   /* console.log(basketReducer);
@@ -115,10 +118,15 @@ const Basket: NextPage = () => {
                         />
                       </div>
                       <div className="basketText">
-                        <h2>{list.name}</h2>
-                        <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
-                        <p>가격 :{basketReducer?.basketList[i]?.price}</p>
+                        <div className="onlyText">
+                          <h2>{list.name}</h2>
+                          <p>
+                            수량 : {basketReducer?.basketList[i]?.quentity}개
+                          </p>
+                          <p>가격 : {basketReducer?.basketList[i]?.price}원</p>
+                        </div>
                         <button
+                          className="removeBasketList"
                           onClick={(e) => {
                             removeBasketList(list.random);
                           }}
@@ -154,11 +162,11 @@ const Basket: NextPage = () => {
         }
         .basketCard {
           display: grid;
-          grid-template-columns: 120px auto;
+          grid-template-columns: 140px auto;
         }
         .basketCardImg {
-          width: 100px;
-          height: 100px;
+          width: 120px;
+          height: 120px;
           place-self: start start;
           margin: 10px;
           border-radius: 5px;
@@ -167,6 +175,24 @@ const Basket: NextPage = () => {
         .basketText {
           padding: 10px;
           padding-left: 0;
+          display: grid;
+          grid-template-rows: 80px;
+        }
+        .onlyText {
+          display: grid;
+          grid-template-rows: repeat(3, auto);
+        }
+        .basketText h2 {
+          font-size: 20px;
+        }
+        .removeBasketList {
+          border: none;
+          background: #9179ff;
+          color: #fff;
+          padding: 6px;
+          border-radius: 5px;
+          width: 160px;
+          max-width: 100%;
         }
       `}</style>
     </>

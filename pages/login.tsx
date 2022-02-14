@@ -102,6 +102,9 @@ const Login: NextPage = () => {
         </Button>
       </div> */}
       <style jsx>{`
+        .loginField {
+          display:grid;
+        }
         .login_fail {
           position: absolute;
           max-width: 600px;
