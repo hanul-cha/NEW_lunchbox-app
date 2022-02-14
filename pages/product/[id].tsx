@@ -73,6 +73,7 @@ const Product: NextPage<allProductType> = ({ product }) => {
       order_id: null,
       quentity: productCount,
       price:productCount * productInfo.price
+      //랜덤
     };
     dispatch(BasketAction([addBasketList]));
 

@@ -22,11 +22,11 @@ interface AxiosResType {
 }
 
 interface AllListType extends AxiosResType {
-  printNum:number
+  printNum: number;
 }
 
 interface AxiosPropType {
-  productList:AxiosResType[]
+  productList: AxiosResType[];
 }
 
 const Basket: NextPage = () => {
@@ -38,31 +38,33 @@ const Basket: NextPage = () => {
   const dispatch = useDispatch();
   /* console.log(basketReducer); */
 
-  useEffect(() => {
-    setAllList([])//초기화
-    basketReducer.basketList.map((basketItem,i) => {
-      if (basketItem.product_id) {
-        const getchDetailProduct = async (id: number) => {
-
-          await axios.get(`http://localhost:3000/api/detailProduct/${id}`)
-          .then((res:AxiosResponse<AxiosPropType>) => {
-            const addRes = {
-              ...res.data.productList[0],
-              printNum:i
-            }
-            
-            setAllList((state) => [...state, addRes])
-          })
-          /* console.log(product.productList[0]) */
+  const getchDetailProduct = async (id: number, i: number) => {
+    await axios
+      .get(`http://localhost:3000/api/detailProduct/${id}`)
+      .then((res: AxiosResponse<AxiosPropType>) => {
+        const addRes = {
+          ...res.data.productList[0],
+          printNum: i,
         };
-        getchDetailProduct(basketItem.product_id);
-      }
-      const sortAllList = allList.sort((a, b) => {
-        return a.printNum - b.printNum
-      })
-      console.log(sortAllList)
-      //이벤트 루프 비동기로인해 생기는 정렬문제 해결
-    });
+        setAllList((state) => {
+          const newState = [...state, addRes]
+          const sortAllList = newState.sort((a, b) => {
+            return a.printNum - b.printNum;
+          });
+          //이벤트 루프 비동기로인해 생기는 정렬문제를 내림차순으로 재할당해서 리턴해줌
+          return sortAllList
+        });
+      });
+    /* console.log(product.productList[0]) */
+  }; //리듀서에 담긴 제품리스트를 비동기처리로 가져와 재할당하는 함수
+
+  useEffect(() => {
+    setAllList([]); //초기화
+      basketReducer.basketList.map((basketItem, i) => {
+        if (basketItem.product_id) {
+          getchDetailProduct(basketItem.product_id, i);
+        }
+      });
   }, []);
 
   console.log(basketReducer);
@@ -70,20 +72,20 @@ const Basket: NextPage = () => {
   console.log(allList);
   //주문표에 있는 id로 만든 제품 리스트
 
-  const removeBasketList = (printNum:number) => {
-    dispatch(PutBasketAction(printNum))
-    const newAllList = allList.filter(
-      (item) => item.printNum !== printNum
-    );
-    setAllList(newAllList)
-  }//제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
+  const removeBasketList = (printNum: number) => {
+    dispatch(PutBasketAction(printNum));
+    const newAllList = allList.filter((item) => item.printNum !== printNum);
+    setAllList(newAllList);
+  }; //제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
 
   useEffect(() => {
     /* const useLocal = window.localStorage.getItem("guestBasket") */
-    window.localStorage.setItem("guestBasket", JSON.stringify(basketReducer.basketList));
-  },[basketReducer.basketList]);
+    window.localStorage.setItem(
+      "guestBasket",
+      JSON.stringify(basketReducer.basketList)
+    );
+  }, [basketReducer.basketList]);
   //제거 버튼을 누리면 리듀서가 바뀌니 그후 반응해 로컬 스토리지에 추가해준다
- 
 
   return (
     <>
@@ -111,7 +113,13 @@ const Basket: NextPage = () => {
                         <h2>{list.name}</h2>
                         <p>수량 : {basketReducer?.basketList[i]?.quentity}</p>
                         <p>가격 :{basketReducer?.basketList[i]?.price}</p>
-                        <button onClick={(e) => {removeBasketList(list.printNum)}}>장바구니에서 제거</button>
+                        <button
+                          onClick={(e) => {
+                            removeBasketList(list.printNum);
+                          }}
+                        >
+                          장바구니에서 제거
+                        </button>
                       </div>
                     </div>
                   </Card>
@@ -130,10 +138,10 @@ const Basket: NextPage = () => {
         .mainDIV {
           padding: 20px;
         }
-        .mainDIV>h1 {
-          font-size:25px;
-          margin-bottom:15px;
-          font-weight:600;
+        .mainDIV > h1 {
+          font-size: 25px;
+          margin-bottom: 15px;
+          font-weight: 600;
         }
         .basketWrapper {
           padding: 20px 0;
@@ -166,7 +174,7 @@ export default Basket;
 장바구니 리듀서에 있는 값들을 가져와서 새로운 리스트를 만들때 가끔씩
 순서가 안맞을때가 있다 발현 조건은 매우매우 다른거로봐서 네트워크 환경에 따라
 비동기처리 스택에 들어오는 속도가 달라서 발생하는 이벤트 루프 문제로 보인다.
-sort메서드로 해결중...
+sort메서드로 해결중... 해결완료!!
 
 이후 삭제 로직을 렌덤 숫자를 부여해 삭제 해야할듯 싶다.
 */
