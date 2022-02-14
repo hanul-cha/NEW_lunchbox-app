@@ -28,7 +28,7 @@ interface allProductType {
   product: {
     productList: productListType[];
   };
-} //현재 페이지 props type
+} //현재 페이지 props type (ssr로 먼저 들어온 제품아이템에 대한 타입)
 
 interface LocalItemType {
   basket_id?: number|null;
@@ -36,7 +36,8 @@ interface LocalItemType {
   order_id?: number|null;
   quentity?: number;
   price?:number;
-}
+  random?:number;
+}//액션으로 넘겨주어야할 오브젝트의 타입
 
 const Product: NextPage<allProductType> = ({ product }) => {
   const [productCount, setProductCount] = useState(1);
@@ -67,13 +68,14 @@ const Product: NextPage<allProductType> = ({ product }) => {
   /* console.log(productInfo); */
 
   const addBasket = () => {
+    const random = Math.floor(Math.random() * 1000000);
     const addBasketList = {
       basket_id: null,
       product_id: productInfo.product_id,
       order_id: null,
       quentity: productCount,
-      price:productCount * productInfo.price
-      //랜덤
+      price:productCount * productInfo.price,
+      random
     };
     dispatch(BasketAction([addBasketList]));
 

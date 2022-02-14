@@ -26,12 +26,12 @@ const BasketReducer = (
         ...state,
       };
     case REMOVE_BASKETLIST:
-      console.log(state.basketList)
-      console.log(action.payload)
+      /* console.log(state.basketList)
+      console.log(action.payload) */
       const newState = state.basketList.filter(
-        (type,index) => index !== action.payload
+        (list) => list.random !== action.payload
       );
-      console.log(newState)
+      /* console.log(newState) */
       state.basketList = newState
       return {
         ...state,

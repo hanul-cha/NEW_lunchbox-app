@@ -10,6 +10,7 @@ import BasketBTN from "../compoenets/basket/BasketBTN";
 import NottingBasket from "../compoenets/basket/NottingBasket";
 import { PutBasketAction } from "../src/actions/BasketAction";
 import axios, { AxiosResponse } from "axios";
+import { BasketReducerPropType } from "../src/actions/BasketActionType";
 
 interface AxiosResType {
   explanation: string;
@@ -23,6 +24,7 @@ interface AxiosResType {
 
 interface AllListType extends AxiosResType {
   printNum: number;
+  random:number;
 }
 
 interface AxiosPropType {
@@ -38,14 +40,15 @@ const Basket: NextPage = () => {
   const dispatch = useDispatch();
   /* console.log(basketReducer); */
 
-  const getchDetailProduct = async (id: number, i: number) => {
+  const getchDetailProduct = async (basketItem: BasketReducerPropType, i: number) => {
     await axios
-      .get(`http://localhost:3000/api/detailProduct/${id}`)
+      .get(`http://localhost:3000/api/detailProduct/${basketItem.product_id}`)
       .then((res: AxiosResponse<AxiosPropType>) => {
         const addRes = {
           ...res.data.productList[0],
           printNum: i,
-        };
+          random:basketItem.random
+        };//비동기로 받은 제품정보에 더해줄 key
         setAllList((state) => {
           const newState = [...state, addRes]
           const sortAllList = newState.sort((a, b) => {
@@ -62,19 +65,19 @@ const Basket: NextPage = () => {
     setAllList([]); //초기화
       basketReducer.basketList.map((basketItem, i) => {
         if (basketItem.product_id) {
-          getchDetailProduct(basketItem.product_id, i);
+          getchDetailProduct(basketItem, i);
         }
       });
   }, []);
 
-  console.log(basketReducer);
+  /* console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
-  //주문표에 있는 id로 만든 제품 리스트
+  //주문표에 있는 id로 만든 제품 리스트 */
 
-  const removeBasketList = (printNum: number) => {
-    dispatch(PutBasketAction(printNum));
-    const newAllList = allList.filter((item) => item.printNum !== printNum);
+  const removeBasketList = (randomNum: number) => {
+    dispatch(PutBasketAction(randomNum));
+    const newAllList = allList.filter((item) => item.random !== randomNum);
     setAllList(newAllList);
   }; //제거 버튼을 누르면 아이템 리스트에서 제거하고 리듀서에서도 제거한다
 
@@ -115,7 +118,7 @@ const Basket: NextPage = () => {
                         <p>가격 :{basketReducer?.basketList[i]?.price}</p>
                         <button
                           onClick={(e) => {
-                            removeBasketList(list.printNum);
+                            removeBasketList(list.random);
                           }}
                         >
                           장바구니에서 제거

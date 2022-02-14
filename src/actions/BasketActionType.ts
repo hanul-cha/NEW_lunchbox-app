@@ -7,7 +7,7 @@ export interface BasketReducerPropType {
   order_id?: number|null;
   quentity?: number;
   price?:number;
-  random?:number;
+  random:number;
 }
 
 export interface BasketSuccessDispatch {
