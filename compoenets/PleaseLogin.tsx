@@ -15,6 +15,10 @@ const PleaseLogin = () => {
     dispatch(PleaseLoginAction(false));
     route.push("/login");
   };
+  const pushOrder = () => {
+    dispatch(PleaseLoginAction(false));
+    route.push("/order");
+  };
   return (
     <>
       <div className="pleaseLogin">
@@ -27,6 +31,7 @@ const PleaseLogin = () => {
               취소
             </button>
             <button onClick={runLogin}>확인</button>
+            <button className="custom_order" onClick={pushOrder}>비회원으로 주문</button>
           </div>
         </Paper>
       </div>
@@ -45,7 +50,7 @@ const PleaseLogin = () => {
           }
           .pleaseLoginCard h2 {
             font-size: 25px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
           }
           .pleaseLoginCard p {
             margin-bottom: 10px;
@@ -60,6 +65,9 @@ const PleaseLogin = () => {
           .removeBtn {
             margin-right: 10px;
           }
+          .custom_order {
+            margin-left: 10px;
+          }
         `}
       </style>
     </>
@@ -67,3 +75,7 @@ const PleaseLogin = () => {
 };
 
 export default PleaseLogin;
+
+/* 
+로그인이 안되있으면 취소하던가 로그인을 시도하던가 비회원으로 주문하던가 삼지선다
+*/

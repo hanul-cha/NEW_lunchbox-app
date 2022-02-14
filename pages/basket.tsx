@@ -47,7 +47,7 @@ const Basket: NextPage = () => {
         const addRes = {
           ...res.data.productList[0],
           printNum: i,
-          random:basketItem.random
+          random:basketItem.random 
         };//비동기로 받은 제품정보에 더해줄 key
         setAllList((state) => {
           const newState = [...state, addRes]
@@ -70,10 +70,10 @@ const Basket: NextPage = () => {
       });
   }, []);
 
-  /* console.log(basketReducer);
+  console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
-  //주문표에 있는 id로 만든 제품 리스트 */
+  //주문표에 있는 id로 만든 제품 리스트
 
   const removeBasketList = (randomNum: number) => {
     dispatch(PutBasketAction(randomNum));

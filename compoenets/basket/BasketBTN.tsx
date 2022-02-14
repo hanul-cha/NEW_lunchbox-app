@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducerType } from "../../src/Store";
 import PleaseLoginAction from "../../src/actions/PleaseLoginAction";
+import { useRouter } from "next/router";
 
 interface BasketType {
   basket_id?: number | null;
@@ -32,6 +33,7 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
 }) => {
   const userReducer = useSelector((state:RootReducerType) => state.UserReducer.user)
   const dispatch = useDispatch();
+  const route = useRouter();
   
   const totalPrice = basketList.reduce(function add(sum, currValue){
       if(typeof currValue.price === "number"){
@@ -45,6 +47,8 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
   const runorder = () => {
     if(userReducer == null){
       dispatch(PleaseLoginAction(true));//로그인 한 유저가 없으면 팝업 활성화
+    } else {
+      route.push("/order");
     }
   }
 
