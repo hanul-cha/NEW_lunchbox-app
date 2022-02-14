@@ -7,10 +7,10 @@ import { BasketAction } from "../../src/actions/BasketAction";
 
 interface LocalItemType {
   basket_id?: number|null;
-  product_id?: number;
+  product_id: number;
   order_id?: number|null;
-  quentity?: number;
-  price?:number;
+  quentity: number;
+  price:number;
   random:number;
 }
 

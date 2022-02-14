@@ -25,6 +25,8 @@ interface AxiosResType {
 interface AllListType extends AxiosResType {
   printNum: number;
   random: number;
+  quentity:number;
+  priceAll:number;
 }
 
 interface AxiosPropType {
@@ -51,7 +53,10 @@ const Basket: NextPage = () => {
           ...res.data.productList[0],
           printNum: i,
           random: basketItem.random,
+          quentity: basketItem.quentity,
+          priceAll: basketItem.price
         }; //비동기로 받은 제품정보에 더해줄 key
+
         setAllList((state) => {
           const newState = [...state, addRes];
           const sortAllList = newState.sort((a, b) => {
@@ -74,11 +79,11 @@ const Basket: NextPage = () => {
     });
   }, []);
 
-  /* console.log(basketReducer);
+  console.log(basketReducer);
   //전역 관리되고 있는 주문표
   console.log(allList);
   //주문표에 있는 id로 만든 제품 리스트
-  */ //확인하고 싶을때 풀자
+  //확인하고 싶을때 풀자
 
   const removeBasketList = (randomNum: number) => {
     dispatch(PutBasketAction(randomNum));
@@ -121,9 +126,9 @@ const Basket: NextPage = () => {
                         <div className="onlyText">
                           <h2>{list.name}</h2>
                           <p>
-                            수량 : {basketReducer?.basketList[i]?.quentity}개
+                            수량 : {list.quentity}개
                           </p>
-                          <p>가격 : {basketReducer?.basketList[i]?.price}원</p>
+                          <p>가격 : {list.priceAll}원</p>
                         </div>
                         <button
                           className="removeBasketList"
@@ -202,10 +207,13 @@ const Basket: NextPage = () => {
 export default Basket;
 
 /* 
-장바구니 리듀서에 있는 값들을 가져와서 새로운 리스트를 만들때 가끔씩
-순서가 안맞을때가 있다 발현 조건은 매우매우 다른거로봐서 네트워크 환경에 따라
-비동기처리 스택에 들어오는 속도가 달라서 발생하는 이벤트 루프 문제로 보인다.
-sort메서드로 해결중... 해결완료!!
+상단에서 데이터를 받아올때 오버패칭 엄청되고 있음 이거 나중에 정리해야할듯함 ㄷ
+데이터를 받아올때 걸러서 가져오고 타입지정 잘해서 다시 해주는게 좋긴함
+필요없는 친구들:
+explanation
+new_product
+price
+productType
 
-이후 삭제 로직을 렌덤 숫자를 부여해 삭제 해야할듯 싶다.
+근데 이거 공유하고 있는 api가 있어서 하면안되네ㄷㄷㄷㄷ
 */
