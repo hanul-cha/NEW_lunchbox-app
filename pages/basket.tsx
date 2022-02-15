@@ -51,8 +51,8 @@ const Basket: NextPage = () => {
       .then((res: AxiosResponse<AxiosPropType>) => {
         const addRes = {
           ...res.data.productList[0],
-          printNum: i,
-          random: basketItem.random,
+          printNum: i,//이걸기준으로 정렬
+          random: basketItem.random,//이걸 기준으로 삭제함
           quentity: basketItem.quentity,
           priceAll: basketItem.price
         }; //비동기로 받은 제품정보에 더해줄 key
@@ -118,7 +118,7 @@ const Basket: NextPage = () => {
                         <CardMedia
                           component="img"
                           image={list.img}
-                          sx={{ width: 200 }}
+                          sx={{ width: 250, marginLeft:-3 }}
                           alt="Live from space album cover"
                         />
                       </div>
@@ -198,6 +198,7 @@ const Basket: NextPage = () => {
           border-radius: 5px;
           width: 160px;
           max-width: 100%;
+          cursor:pointer;
         }
       `}</style>
     </>
@@ -206,14 +207,3 @@ const Basket: NextPage = () => {
 
 export default Basket;
 
-/* 
-상단에서 데이터를 받아올때 오버패칭 엄청되고 있음 이거 나중에 정리해야할듯함 ㄷ
-데이터를 받아올때 걸러서 가져오고 타입지정 잘해서 다시 해주는게 좋긴함
-필요없는 친구들:
-explanation
-new_product
-price
-productType
-
-근데 이거 공유하고 있는 api가 있어서 하면안되네ㄷㄷㄷㄷ
-*/

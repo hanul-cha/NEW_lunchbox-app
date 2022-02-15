@@ -57,6 +57,11 @@ const Login: NextPage = () => {
   로그인 시킬지 알람을 켜줄지 결정함
   */
 
+  const pushTest = () => {
+    setId("ccchhh1234");
+    setpsword("123456");
+  };
+
   return (
     <>
       <GlobalTitle title="Login" />
@@ -68,42 +73,70 @@ const Login: NextPage = () => {
           </Alert>
         </div>
       )}
-      <div className="loginField">
-        <TextField
-          className="textField"
-          id="outlined-id"
-          label="id"
-          variant="outlined"
-          placeholder="user id"
-          name="id"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-        />
 
-        <TextField
-          className="textField"
-          id="outlined-password"
-          label="password"
-          variant="outlined"
-          name="psword"
-          type="password"
-          placeholder="user password"
-          value={psword}
-          onChange={(e) => setpsword(e.target.value)}
-        />
+      <div className="login">
+        <h1>로그인</h1>
+        <div className="loginField">
+          <TextField
+            className="textField"
+            id="outlined-id"
+            label="id"
+            variant="outlined"
+            placeholder="user id"
+            name="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
 
-        <Button className="login_btn" variant="outlined" onClick={pushBtn}>
-          login
-        </Button>
+          <TextField
+            className="textField"
+            id="outlined-password"
+            label="password"
+            variant="outlined"
+            name="psword"
+            type="password"
+            placeholder="user password"
+            value={psword}
+            onChange={(e) => setpsword(e.target.value)}
+          />
+
+          <Button className="login_btn" variant="outlined" onClick={pushBtn}>
+            login
+          </Button>
+        </div>
+
+        <div className="runLoginTestWrapper">
+          <Button
+            sx={{ width: 400 }}
+            className="runLoginTest"
+            variant="outlined"
+            onClick={pushTest}
+          >
+            테스트용 아이디로 로그인하기
+          </Button>
+        </div>
+
+        <div className="tryJoin">
+          <p>혹시 저희 hanul-box가 처음이신가요??</p>
+          <button>회원가입하기</button>
+        </div>
       </div>
-      {/* <div className="runLoginTestWrapper">
-        <Button sx={{width:400}} className="runLoginTest" variant="outlined" onClick={pushTest}>
-          테스트용 아이디로 로그인하기
-        </Button>
-      </div> */}
       <style jsx>{`
+        .login {
+          padding:20px;
+        }
+        .login h1 {
+          font-size:25px;
+          font-weight:600;
+          margin-bottom:20px;
+        }
         .loginField {
-          display:grid;
+          width:300px;
+          display: grid;
+          gap:10px;
+        }
+        .runLoginTestWrapper {
+          margin: 20px 0;
         }
         .login_fail {
           position: absolute;
@@ -113,6 +146,10 @@ const Login: NextPage = () => {
           top: 0;
           left: 50%;
           transform: translateX(-50%);
+        }
+        .tryJoin{
+          display:grid;
+          justify-content: end;
         }
       `}</style>
     </>

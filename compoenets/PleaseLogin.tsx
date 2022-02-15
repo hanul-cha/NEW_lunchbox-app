@@ -61,6 +61,7 @@ const PleaseLogin = () => {
             color: #fff;
             background: #00aaff;
             padding: 5px 10px;
+            cursor:pointer;
           }
           .removeBtn {
             margin-right: 10px;

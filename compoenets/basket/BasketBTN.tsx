@@ -66,7 +66,8 @@ const BasketBTN: NextPage<BasgetBTNpropType> = ({
           border:none;
           background:#00aaff;
           border-radius:5px;
-          padding:20px
+          padding:20px;
+          cursor:pointer;
         }  
         .basketBtn h2 {
           color:#fff;
